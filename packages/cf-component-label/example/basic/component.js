@@ -1,20 +1,14 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import Label from 'cf-component-label';
 
-const Label = require('../../src/index');
+const LabelComponent = () => (
+  <p>
+    <Label type="default">Default</Label>
+    <Label type="info">Info</Label>
+    <Label type="success">Success</Label>
+    <Label type="warning">Warning</Label>
+    <Label type="error">Error</Label>
+  </p>
+);
 
-class Component extends React.Component {
-  render() {
-    return (
-      <p>
-        <Label type="default">Default</Label>
-        <Label type="info">Info</Label>
-        <Label type="success">Success</Label>
-        <Label type="warning">Warning</Label>
-        <Label type="error">Error</Label>
-      </p>
-    );
-  }
-}
-
-render(<Component />, document.getElementById('cf-component-label--basic'));
+export default LabelComponent;

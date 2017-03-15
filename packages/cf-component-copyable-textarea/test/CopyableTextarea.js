@@ -1,103 +1,69 @@
-const React = require('react');
-const TestUtils = require('react-addons-test-utils');
-const sinon = require('sinon');
-const expect = require('chai').expect;
-const assertEqualJSX = require('assert-equal-jsx');
-const CopyableTextarea = require('../src/CopyableTextarea');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import jsdom from 'jsdom';
+import { mount } from 'enzyme';
+import CopyableTextarea from 'cf-component-copyable-textarea';
 
-describe('CopyableTextarea', () => {
-  it('should render', () => {
-    assertEqualJSX(
-      <CopyableTextarea
-        name="example"
-        value="content"
-        clickToCopyText="click here"
-        copiedTextToClipboardText="copied"
-        pressCommandOrCtrlCToCopyText="press here"
-      />,
-      <div className="cf-copyable-textarea">
-        <textarea
-          className="cf-textarea cf-textarea--readonly"
-          readOnly
-          name="example"
-          value="content"
-          onChange={() => {}}
-        />
-        <p className="cf-copyable-textarea__help-text">click here</p>
-      </div>
-    );
-  });
+beforeEach(() => {
+  const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
+  global.document = doc;
+  global.window = doc.defaultView;
+  global.document.execCommand = () => true;
+});
 
-  it('should call onCopy on focus', () => {
-    // because under Karma, document.execCommand('copy') always returns false
-    sinon.stub(document, 'execCommand').returns(true);
+test('should render', () => {
+  const component = renderer.create(
+    <CopyableTextarea
+      name="example"
+      value="content"
+      clickToCopyText="click here"
+      copiedTextToClipboardText="copied"
+      pressCommandOrCtrlCToCopyText="press here"
+    />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-    let clicked = false;
+test('should call onCopy on focus', () => {
+  let clicked = false;
+  const copyableTextarea = mount(
+    <CopyableTextarea
+      name="example"
+      value="content"
+      onCopy={() => clicked = true}
+    />
+  );
+  copyableTextarea.find('textarea').simulate('focus');
+  expect(clicked).toBeTruthy();
+});
 
-    const copyableTextarea = TestUtils.renderIntoDocument(
-      <CopyableTextarea
-        name="example"
-        value="content"
-        onCopy={() => clicked = true}
-      />
-    );
-    const textarea = TestUtils.findRenderedDOMComponentWithClass(
-      copyableTextarea,
-      'cf-textarea'
-    );
+test('should render copied help text after copying', () => {
+  const copyableTextarea = mount(
+    <CopyableTextarea
+      name="example"
+      value="content"
+      copiedTextToClipboardText="copied"
+    />
+  );
+  copyableTextarea.find('textarea').simulate('focus');
+  expect(copyableTextarea.find('.cf-copyable-textarea__help-text').text()).toBe(
+    'copied'
+  );
+});
 
-    TestUtils.Simulate.focus(textarea);
-    expect(clicked).to.be.true;
-
-    document.execCommand.restore();
-  });
-
-  it('should render copied help text after copying', () => {
-    // because under Karma, document.execCommand('copy') always returns false
-    sinon.stub(document, 'execCommand').returns(true);
-
-    const copyableTextarea = TestUtils.renderIntoDocument(
-      <CopyableTextarea
-        name="example"
-        value="content"
-        copiedTextToClipboardText="copied"
-      />
-    );
-    const textarea = TestUtils.findRenderedDOMComponentWithClass(
-      copyableTextarea,
-      'cf-textarea'
-    );
-    const helpText = TestUtils.findRenderedDOMComponentWithClass(
-      copyableTextarea,
-      'cf-copyable-textarea__help-text'
-    );
-
-    TestUtils.Simulate.focus(textarea);
-
-    expect(helpText.innerText.trim()).to.be.equal('copied');
-
-    document.execCommand.restore();
-  });
-
-  it('should render press help text if copying was not successful', () => {
-    const copyableTextarea = TestUtils.renderIntoDocument(
-      <CopyableTextarea
-        name="example"
-        value="content"
-        pressCommandOrCtrlCToCopyText="press here"
-      />
-    );
-    const textarea = TestUtils.findRenderedDOMComponentWithClass(
-      copyableTextarea,
-      'cf-textarea'
-    );
-    const helpText = TestUtils.findRenderedDOMComponentWithClass(
-      copyableTextarea,
-      'cf-copyable-textarea__help-text'
-    );
-
-    TestUtils.Simulate.focus(textarea);
-
-    expect(helpText.innerText.trim()).to.be.equal('press here');
-  });
+test('should render press help text if copying was not successful', () => {
+  global.document.execCommand = () => {
+    throw new Error('error');
+  };
+  const copyableTextarea = mount(
+    <CopyableTextarea
+      name="example"
+      value="content"
+      pressCommandOrCtrlCToCopyText="press here"
+    />
+  );
+  copyableTextarea.find('textarea').simulate('focus');
+  expect(copyableTextarea.find('.cf-copyable-textarea__help-text').text()).toBe(
+    'press here'
+  );
 });

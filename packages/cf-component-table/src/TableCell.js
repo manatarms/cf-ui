@@ -1,16 +1,21 @@
-const React = require('react');
-const { PropTypes } = React;
+import React, { PropTypes } from 'react';
 
 class TableCell extends React.Component {
   render() {
-    let className = 'cf-table__cell';
-    if (this.props.align)
-      className += ' cf-table__cell--align-' + this.props.align;
-    if (this.props.className.trim())
-      className += ' ' + this.props.className.trim();
+    const { className, align, children, ...props } = this.props;
+
+    let _className = 'cf-table__cell';
+
+    if (align) {
+      _className += ` cf-table__cell--align-${align}`;
+    }
+
+    if (className && className.trim()) {
+      _className += ' ' + className.trim();
+    }
 
     return (
-      <td className={className}>
+      <td className={_className} {...props}>
         {this.props.children}
       </td>
     );
@@ -27,4 +32,4 @@ TableCell.defaultProps = {
   className: ''
 };
 
-module.exports = TableCell;
+export default TableCell;

@@ -1,41 +1,27 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const TableRow = require('../src/TableRow');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { TableRow } from 'cf-component-table';
 
-describe('TableRow', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <TableRow>TableRow</TableRow>,
-      // should equal
-      <tr className="cf-table__row cf-table__row--default">TableRow</tr>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<TableRow>TableRow</TableRow>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render extra class name', function() {
-    assertEqualJSX(
-      <TableRow className="extra">TableRow</TableRow>,
-      // should equal
-      <tr className="cf-table__row cf-table__row--default extra">TableRow</tr>
-    );
-  });
+test('should render extra class name', () => {
+  const component = renderer.create(
+    <TableRow className="extra">TableRow</TableRow>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render with type', function() {
-    assertEqualJSX(
-      <TableRow type="error">TableRow</TableRow>,
-      // should equal
-      <tr className="cf-table__row cf-table__row--error">TableRow</tr>
-    );
-  });
+test('should render with type', () => {
+  const component = renderer.create(<TableRow type="error">TableRow</TableRow>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render with accent', function() {
-    assertEqualJSX(
-      <TableRow accent="orange">TableRow</TableRow>,
-      // should equal
-      <tr
-        className="cf-table__row cf-table__row--default cf-table__row--accent-orange"
-      >
-        TableRow
-      </tr>
-    );
-  });
+test('should render with accent', () => {
+  const component = renderer.create(
+    <TableRow accent="orange">TableRow</TableRow>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

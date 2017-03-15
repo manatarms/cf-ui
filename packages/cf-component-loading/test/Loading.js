@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Loading = require('../src/Loading');
-const Icon = require('cf-component-icon');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Loading from 'cf-component-loading';
 
-describe('Loading', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Loading />,
-      <Icon type="loading" label="Loading" role="status" />
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Loading />);
+  expect(component.toJSON()).toMatchSnapshot();
 });

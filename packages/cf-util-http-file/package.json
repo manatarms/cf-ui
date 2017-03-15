@@ -1,8 +1,10 @@
 {
   "name": "cf-util-http-file",
-  "description": "CloudFlare HTTP File Util",
+  "description": "Cloudflare HTTP File Util",
   "version": "4.0.1",
   "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
   "author": "James Kyle <jkyle@cloudflare.com>",
   "license": "BSD-3-Clause",
   "publishConfig": {
@@ -10,9 +12,5 @@
   },
   "dependencies": {
     "cf-util-http": "^3.0.1"
-  },
-  "devDependencies": {
-    "express": "^4.13.3",
-    "multer": "^1.1.0"
   }
 }

@@ -1,9 +1,7 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import Progress from 'cf-component-progress';
 
-const Progress = require('../../src/index');
-
-class Component extends React.Component {
+class ProgressComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,4 +30,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-progress--basic'));
+export default ProgressComponent;

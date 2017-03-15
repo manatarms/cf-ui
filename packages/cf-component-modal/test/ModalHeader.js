@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const ModalHeader = require('../src/ModalHeader');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { ModalHeader } from 'cf-component-modal';
 
-describe('ModalHeader', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <ModalHeader>ModalHeader</ModalHeader>,
-      // should equal
-      <header className="cf-modal__header">ModalHeader</header>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<ModalHeader>ModalHeader</ModalHeader>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Sub = require('../src/Sub');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Sub from '../src/Sub';
 
-describe('Sub', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Sub>Sub</Sub>,
-      // should equal
-      <sub className="cf-sub">Sub</sub>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Sub>Sub</Sub>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

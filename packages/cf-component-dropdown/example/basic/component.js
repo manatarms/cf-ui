@@ -1,21 +1,21 @@
-const React = require('react');
-const { render } = require('react-dom');
-const { handleRoutes } = require('cf-util-route-handler');
-
-handleRoutes(route => console.log(route));
-
-const {
-  Button,
-  ButtonGroup
-} = require('cf-component-button');
-
-const {
+import React from 'react';
+import {
   Dropdown,
   DropdownLink,
   DropdownSeparator
-} = require('../../src/index');
+} from 'cf-component-dropdown';
+import {
+  Button as ButtonUnstyled,
+  ButtonTheme,
+  ButtonGroup as ButtonGroupUnstyled,
+  ButtonGroupTheme
+} from 'cf-component-button';
+import { applyTheme } from 'cf-style-container';
 
-class Component extends React.Component {
+const Button = applyTheme(ButtonUnstyled, ButtonTheme);
+const ButtonGroup = applyTheme(ButtonGroupUnstyled, ButtonGroupTheme);
+
+class DropdownComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +44,7 @@ class Component extends React.Component {
           </Dropdown>}
 
         <Button
-          type="primary"
+          type="success"
           onClick={() => this.setState({ dropdown2Open: true })}
         >
           Open Dropdown 2
@@ -66,4 +66,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-dropdown--basic'));
+export default DropdownComponent;

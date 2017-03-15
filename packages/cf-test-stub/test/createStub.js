@@ -1,58 +1,55 @@
-const assert = require('assert');
-const { createStub } = require('../src/index');
+import { createStub } from 'cf-test-stub';
 
-describe('createStub()', () => {
-  it('should create a callable function', () => {
-    const stub = createStub();
-    assert.ok(typeof stub === 'function');
-    stub();
-  });
+test('should create a callable function', () => {
+  const stub = createStub();
+  expect(typeof stub === 'function').toBeTruthy();
+  stub();
+});
 
-  it('should have a called property', () => {
-    const stub = createStub();
-    assert.ok(!stub.called);
-    stub();
-    assert.ok(stub.called);
-  });
+test('should have a called property', () => {
+  const stub = createStub();
+  expect(!stub.called).toBeTruthy();
+  stub();
+  expect(stub.called).toBeTruthy();
+});
 
-  it('should have a callCount property', () => {
-    const stub = createStub();
-    assert.equal(stub.callCount, 0);
-    stub();
-    assert.equal(stub.callCount, 1);
-    stub();
-    assert.equal(stub.callCount, 2);
-  });
+test('should have a callCount property', () => {
+  const stub = createStub();
+  expect(stub.callCount).toBe(0);
+  stub();
+  expect(stub.callCount).toBe(1);
+  stub();
+  expect(stub.callCount).toBe(2);
+});
 
-  it('should have a calls property', () => {
-    const stub = createStub();
-    assert.deepEqual(stub.calls, []);
-    stub.call(1, 2, 3);
-    assert.deepEqual(stub.calls, [
-      {
-        context: 1,
-        args: [2, 3]
-      }
-    ]);
+test('should have a calls property', () => {
+  const stub = createStub();
+  expect(stub.calls).toEqual([]);
+  stub.call(1, 2, 3);
+  expect(stub.calls).toEqual([
+    {
+      context: 1,
+      args: [2, 3]
+    }
+  ]);
 
-    stub.call(4, 5, 6);
-    assert.deepEqual(stub.calls, [
-      {
-        context: 1,
-        args: [2, 3]
-      },
-      {
-        context: 4,
-        args: [5, 6]
-      }
-    ]);
-  });
+  stub.call(4, 5, 6);
+  expect(stub.calls).toEqual([
+    {
+      context: 1,
+      args: [2, 3]
+    },
+    {
+      context: 4,
+      args: [5, 6]
+    }
+  ]);
+});
 
-  const outsideStub = createStub();
+const outsideStub = createStub();
 
-  it('should not allow the stub to be used outside of the current test', () => {
-    assert.throws(() => outsideStub.called);
-    assert.throws(() => outsideStub.callCount);
-    assert.throws(() => outsideStub.calls);
-  });
+test('should not allow the stub to be used outside of the current test', () => {
+  expect(() => outsideStub.called).toThrow();
+  expect(() => outsideStub.callCount).toThrow();
+  expect(() => outsideStub.calls).toThrow();
 });

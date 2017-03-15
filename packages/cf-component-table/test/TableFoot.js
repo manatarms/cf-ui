@@ -1,21 +1,15 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const TableFoot = require('../src/TableFoot');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { TableFoot } from 'cf-component-table';
 
-describe('TableFoot', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <TableFoot>TableFoot</TableFoot>,
-      // should equal
-      <tfoot className="cf-table__foot">TableFoot</tfoot>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<TableFoot>TableFoot</TableFoot>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render extra class name', function() {
-    assertEqualJSX(
-      <TableFoot className="extra">TableFoot</TableFoot>,
-      // should equal
-      <tfoot className="cf-table__foot extra">TableFoot</tfoot>
-    );
-  });
+test('should render extra class name', () => {
+  const component = renderer.create(
+    <TableFoot className="extra">TableFoot</TableFoot>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

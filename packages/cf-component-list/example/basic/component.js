@@ -1,32 +1,26 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import { List, ListItem } from 'cf-component-list';
 
-const { List, ListItem } = require('../../src/index');
+const ListComponent = () => (
+  <div>
+    <p>Basic usage:</p>
+    <List>
+      <ListItem>One</ListItem>
+      <ListItem>Two</ListItem>
+    </List>
 
-class Component extends React.Component {
-  render() {
-    return (
-      <div>
-        <p>Basic usage:</p>
-        <List>
-          <ListItem>One</ListItem>
-          <ListItem>Two</ListItem>
-        </List>
+    <p>Ordered list:</p>
+    <List ordered>
+      <ListItem>One</ListItem>
+      <ListItem>Two</ListItem>
+    </List>
 
-        <p>Ordered list:</p>
-        <List ordered>
-          <ListItem>One</ListItem>
-          <ListItem>Two</ListItem>
-        </List>
+    <p>Unstyled list:</p>
+    <List unstyled>
+      <ListItem>One</ListItem>
+      <ListItem>Two</ListItem>
+    </List>
+  </div>
+);
 
-        <p>Unstyled list:</p>
-        <List unstyled>
-          <ListItem>One</ListItem>
-          <ListItem>Two</ListItem>
-        </List>
-      </div>
-    );
-  }
-}
-
-render(<Component />, document.getElementById('cf-component-list--basic'));
+export default ListComponent;

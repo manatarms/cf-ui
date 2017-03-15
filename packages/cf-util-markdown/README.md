@@ -1,6 +1,6 @@
 # cf-util-markdown
 
-> CloudFlare Markdown Util
+> Cloudflare Markdown Util
 
 This utility library is a simple interface that hides away the markdown
 implementation being used so that it can easily be swapped out for something
@@ -15,7 +15,7 @@ $ npm install cf-util-markdown
 ## Usage
 
 ```js
-const markdown = require('cf-util-markdown');
+import markdown from 'cf-util-markdown';
 
 markdown('# Hello World');
 // >> <h1>Hello World</h1>

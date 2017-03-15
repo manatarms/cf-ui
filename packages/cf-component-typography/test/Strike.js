@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Strike = require('../src/Strike');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Strike from '../src/Strike';
 
-describe('Strike', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Strike>Strike</Strike>,
-      // should equal
-      <s className="cf-strike">Strike</s>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Strike>Strike</Strike>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

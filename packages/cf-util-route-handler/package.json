@@ -1,16 +1,13 @@
 {
   "name": "cf-util-route-handler",
-  "description": "CloudFlare Route Handler Util",
+  "description": "Cloudflare Route Handler Util",
   "version": "4.0.1",
   "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
   "author": "James Kyle <jkyle@cloudflare.com>",
   "license": "BSD-3-Clause",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "backbone": "^1.2.3",
-    "jquery": "^2.1.4"
   }
 }

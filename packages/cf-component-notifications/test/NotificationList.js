@@ -1,13 +1,10 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const NotificationList = require('../src/NotificationList');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { NotificationList } from 'cf-component-notifications';
 
-describe('NotificationList', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <NotificationList>NotificationList</NotificationList>,
-      // should equal
-      <div className="cf-notifications">NotificationList</div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(
+    <NotificationList>NotificationList</NotificationList>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

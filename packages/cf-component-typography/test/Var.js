@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Var = require('../src/Var');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Var from '../src/Var';
 
-describe('Var', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Var>Var</Var>,
-      // should equal
-      <var className="cf-var">Var</var>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Var>Var</Var>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

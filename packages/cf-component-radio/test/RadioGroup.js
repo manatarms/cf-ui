@@ -1,36 +1,17 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const RadioGroup = require('../src/RadioGroup');
-const Radio = require('../src/Radio');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { RadioGroup } from 'cf-component-radio';
 
-describe('RadioGroup', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <RadioGroup
-        value="option1"
-        onChange={() => {}}
-        options={[
-          { label: 'Option 1', name: 'group-option-1', value: 'option1' },
-          { label: 'Option 2', name: 'group-option-2', value: 'option2' }
-        ]}
-      />,
-      // should equal
-      <div className="cf-radio__group">
-        <Radio
-          label="Option 1"
-          name="group-option-1"
-          value="option1"
-          checked={true}
-          onChange={() => {}}
-        />
-        <Radio
-          label="Option 2"
-          name="group-option-2"
-          value="option2"
-          checked={false}
-          onChange={() => {}}
-        />
-      </div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(
+    <RadioGroup
+      value="option1"
+      onChange={() => {}}
+      options={[
+        { label: 'Option 1', name: 'group-option-1', value: 'option1' },
+        { label: 'Option 2', name: 'group-option-2', value: 'option2' }
+      ]}
+    />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

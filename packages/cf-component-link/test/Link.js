@@ -1,55 +1,43 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Link = require('../src/Link');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Link from 'cf-component-link';
 
-describe('Link', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Link to="/route">Hello World</Link>,
-      // should equal
-      <a href="/route" className="cf-link">Hello World</a>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Link to="/route">Hello World</Link>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render with onClick', function() {
-    assertEqualJSX(
-      <Link onClick={() => {}}>Hello World</Link>,
-      // should equal
-      <a href="#!" role="button" className="cf-link">Hello World</a>
-    );
-  });
+test('should render with onClick', () => {
+  const component = renderer.create(
+    <Link onClick={() => {}}>Hello World</Link>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render with tagName', function() {
-    assertEqualJSX(
-      <Link to="/route" tagName="button">Hello World</Link>,
-      // should equal
-      <button role="link" className="cf-link">Hello World</button>
-    );
-  });
+test('should render with tagName', () => {
+  const component = renderer.create(
+    <Link to="/route" tagName="button">Hello World</Link>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render with className', function() {
-    assertEqualJSX(
-      <Link to="/route" className="special-link">Hello World</Link>,
-      // should equal
-      <a href="/route" className="cf-link special-link">Hello World</a>
-    );
-  });
+test('should render with className', () => {
+  const component = renderer.create(
+    <Link to="/route" className="special-link">Hello World</Link>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render with role', function() {
-    assertEqualJSX(
-      <Link to="/route" role="button" tagName="div">Hello World</Link>,
-      // should equal
-      <div role="button" className="cf-link">Hello World</div>
-    );
-  });
+test('should render with role', () => {
+  const component = renderer.create(
+    <Link to="/route" role="button" tagName="div">Hello World</Link>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render with disabled', function() {
-    assertEqualJSX(
-      <Link to="/route" disabled>Hello World</Link>,
-      // should equal
-      <a href="/route" className="cf-link cf-link--disabled" disabled>
-        Hello World
-      </a>
-    );
-  });
+test('should render with disabled', () => {
+  const component = renderer.create(
+    <Link to="/route" disabled>Hello World</Link>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

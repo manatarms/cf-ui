@@ -1,27 +1,22 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import { Tabs, TabsPanel } from 'cf-component-tabs';
 
-const {
-  Tabs,
-  TabsPanel
-} = require('../../src/index');
-
-class Component extends React.Component {
+class TabsComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: 'one'
+      active: 'one'
     };
   }
 
   handleTabChange(id) {
-    this.setState({ activeTab: id });
+    this.setState({ active: id });
   }
 
   render() {
     return (
       <Tabs
-        activeTab={this.state.activeTab}
+        active={this.state.active}
         tabs={[
           { id: 'one', label: 'Tab One' },
           { id: 'two', label: 'Tab Two' },
@@ -46,4 +41,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-tabs--basic'));
+export default TabsComponent;

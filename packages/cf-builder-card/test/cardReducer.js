@@ -1,50 +1,46 @@
-const assert = require('assert');
-const { cardReducer, CardActionTypes } = require('../src/index');
+import { cardReducer, CardActionTypes } from 'cf-builder-card';
 
-describe('cardReducerTest', () => {
-  it('should have initial state', () => {
-    assert.deepEqual(cardReducer(undefined, {}), {});
+test('should have initial state', () => {
+  expect(cardReducer(undefined, {})).toEqual({});
+});
+
+test('CF_BUILDER_CARD_DRAWER_TOGGLE should toggle the drawer', () => {
+  const cardName = 'TEST_CARD_NAME';
+  const drawerId = 'TEST_DRAWER_ID';
+
+  // Active
+  expect(
+    cardReducer(
+      {},
+      {
+        type: CardActionTypes.CF_BUILDER_CARD_DRAWER_TOGGLE,
+        cardName: cardName,
+        drawerId: drawerId
+      }
+    )
+  ).toEqual({
+    [cardName]: {
+      activeDrawer: drawerId
+    }
   });
 
-  describe('CF_BUILDER_CARD_DRAWER_TOGGLE', () => {
-    it('should toggle the drawer', () => {
-      const cardName = 'TEST_CARD_NAME';
-      const drawerId = 'TEST_DRAWER_ID';
-
-      // Active
-      assert.deepEqual(
-        cardReducer({}, {
-          type: CardActionTypes.CF_BUILDER_CARD_DRAWER_TOGGLE,
-          cardName: cardName,
-          drawerId: drawerId
-        }),
-        {
-          [cardName]: {
-            activeDrawer: drawerId
-          }
+  // Inactive
+  expect(
+    cardReducer(
+      {
+        [cardName]: {
+          activeDrawer: drawerId
         }
-      );
-
-      // Inactive
-      assert.deepEqual(
-        cardReducer(
-          {
-            [cardName]: {
-              activeDrawer: drawerId
-            }
-          },
-          {
-            type: CardActionTypes.CF_BUILDER_CARD_DRAWER_TOGGLE,
-            cardName: cardName,
-            drawerId: drawerId
-          }
-        ),
-        {
-          [cardName]: {
-            activeDrawer: null
-          }
-        }
-      );
-    });
+      },
+      {
+        type: CardActionTypes.CF_BUILDER_CARD_DRAWER_TOGGLE,
+        cardName: cardName,
+        drawerId: drawerId
+      }
+    )
+  ).toEqual({
+    [cardName]: {
+      activeDrawer: null
+    }
   });
 });

@@ -1,50 +1,40 @@
-const React = require('react');
-const expect = require('chai').expect;
-const enzyme = require('enzyme');
-const assertEqualJSX = require('assert-equal-jsx');
-const Flex = require('../src/Flex');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { render } from 'enzyme';
+import { Flex } from 'cf-component-flex';
 
-describe('Flex', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Flex>Hello</Flex>,
-      // should equal
-      <div className="cf-flex">Hello</div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Flex>Hello</Flex>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render spacing', function() {
-    assertEqualJSX(
-      <Flex spacing="thin">Hello</Flex>,
-      // should equal
-      <div className="cf-flex cf-flex--thin">Hello</div>
-    );
+test('should render thin spacing', () => {
+  const component = renderer.create(<Flex spacing="thin">Hello</Flex>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-    assertEqualJSX(
-      <Flex spacing="wide">Hello</Flex>,
-      // should equal
-      <div className="cf-flex cf-flex--wide">Hello</div>
-    );
-  });
+test('should render wide spacing', () => {
+  const component = renderer.create(<Flex spacing="wide">Hello</Flex>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render flex container styles', function() {
-    const wrapper = enzyme.render(
-      <Flex
-        direction="row"
-        wrap="wrap"
-        justifyContent="flex-start"
-        alignItems="center"
-        alignContent="stretch"
-      >
-        Hello
-      </Flex>
-    );
+test('should render flex container styles', () => {
+  const wrapper = render(
+    <Flex
+      direction="row"
+      wrap="wrap"
+      justifyContent="flex-start"
+      alignItems="center"
+      alignContent="stretch"
+    >
+      Hello
+    </Flex>
+  );
 
-    const css = wrapper.find('div').first().css();
-    expect(css['flex-direction']).to.equal('row');
-    expect(css['flex-wrap']).to.equal('wrap');
-    expect(css['justify-content']).to.equal('flex-start');
-    expect(css['align-items']).to.equal('center');
-    expect(css['align-content']).to.equal('stretch');
-  });
+  const css = wrapper.find('div').first().css();
+  expect(css['flex-direction']).toBe('row');
+  expect(css['flex-wrap']).toBe('wrap');
+  expect(css['justify-content']).toBe('flex-start');
+  expect(css['align-items']).toBe('center');
+  expect(css['align-content']).toBe('stretch');
 });

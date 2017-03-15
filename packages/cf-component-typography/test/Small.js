@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Small = require('../src/Small');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Small from '../src/Small';
 
-describe('Small', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Small>Small</Small>,
-      // should equal
-      <small className="cf-small">Small</small>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Small>Small</Small>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

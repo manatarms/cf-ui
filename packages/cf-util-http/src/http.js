@@ -1,5 +1,5 @@
-const superagent = require('superagent');
-const createLogger = require('cf-util-logger');
+import superagent from 'superagent';
+import createLogger from 'cf-util-logger';
 
 const logRequest = createLogger('http:request');
 const logError = createLogger('http:error');
@@ -148,4 +148,4 @@ function del(...args) {
   return request('DELETE', ...args);
 }
 
-module.exports = { beforeSend, request, get, post, put, patch, del };
+export default { beforeSend, request, get, post, put, patch, del };

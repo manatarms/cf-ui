@@ -1,19 +1,17 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Form = require('../src/Form');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { Form } from 'cf-component-form';
 
-describe('Form', function() {
-  it('should render layout', function() {
-    assertEqualJSX(
-      <Form layout="horizontal">Form</Form>,
-      // should equal
-      <form className="cf-form cf-form--horizontal">Form</form>
-    );
+test('should render horizontal layout', () => {
+  const component = renderer.create(
+    <Form layout="horizontal" onSubmit={() => console.log('submit')}>Form</Form>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-    assertEqualJSX(
-      <Form layout="vertical">Form</Form>,
-      // should equal
-      <form className="cf-form cf-form--vertical">Form</form>
-    );
-  });
+test('should render vertical layout', () => {
+  const component = renderer.create(
+    <Form layout="vertical" onSubmit={() => console.log('submit')}>Form</Form>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

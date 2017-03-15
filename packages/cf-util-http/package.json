@@ -1,8 +1,10 @@
 {
   "name": "cf-util-http",
-  "description": "CloudFlare HTTP Util",
+  "description": "Cloudflare HTTP Util",
   "version": "3.0.1",
   "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
   "author": "James Kyle <jkyle@cloudflare.com>",
   "license": "BSD-3-Clause",
   "publishConfig": {
@@ -11,8 +13,5 @@
   "dependencies": {
     "cf-util-logger": "^2.0.0",
     "superagent": "^1.4.0"
-  },
-  "devDependencies": {
-    "cf-test-server": "^2.0.1"
   }
 }

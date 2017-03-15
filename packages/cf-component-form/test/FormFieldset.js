@@ -1,20 +1,10 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const FormFieldset = require('../src/FormFieldset');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { FormFieldset } from 'cf-component-form';
 
-describe('FormFieldset', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <FormFieldset legend="Legend">FormFieldset</FormFieldset>,
-      // should equal
-      <fieldset className="cf-form__fieldset">
-        <legend className="cf-form__fieldset_legend">
-          Legend
-        </legend>
-        <div className="cf-form__fieldset_content">
-          FormFieldset
-        </div>
-      </fieldset>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(
+    <FormFieldset legend="Legend">FormFieldset</FormFieldset>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

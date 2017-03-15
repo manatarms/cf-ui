@@ -1,34 +1,21 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Dropdown = require('../src/Dropdown');
-const DropdownLink = require('../src/DropdownLink');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { Dropdown, DropdownLink } from 'cf-component-dropdown';
 
-describe('DropdownLink', function() {
-  it('should render with to', function() {
-    assertEqualJSX(
-      <Dropdown onClose={() => {}}>
-        <DropdownLink to="/foo">Route to /foo</DropdownLink>
-      </Dropdown>,
-      // should equal
-      <ul role="menu" className="cf-dropdown cf-dropdown--left">
-        <li className="cf-dropdown__link" role="menuitem">
-          <a href="/foo" className="cf-link">Route to /foo</a>
-        </li>
-      </ul>
-    );
-  });
+test('should render with to', () => {
+  const component = renderer.create(
+    <Dropdown onClose={() => {}}>
+      <DropdownLink to="/foo">Route to /foo</DropdownLink>
+    </Dropdown>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render with onClick', function() {
-    assertEqualJSX(
-      <Dropdown onClose={() => {}}>
-        <DropdownLink onClick={() => {}}>onClick handler</DropdownLink>
-      </Dropdown>,
-      // should equal
-      <ul role="menu" className="cf-dropdown cf-dropdown--left">
-        <li className="cf-dropdown__link" role="menuitem">
-          <a href="#!" role="button" className="cf-link">onClick handler</a>
-        </li>
-      </ul>
-    );
-  });
+test('should render with onClick', () => {
+  const component = renderer.create(
+    <Dropdown onClose={() => {}}>
+      <DropdownLink onClick={() => {}}>onClick handler</DropdownLink>
+    </Dropdown>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

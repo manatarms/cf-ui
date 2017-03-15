@@ -1,38 +1,29 @@
-const React = require('react');
-const expect = require('chai').expect;
-const enzyme = require('enzyme');
-const assertEqualJSX = require('assert-equal-jsx');
-const FlexItem = require('../src/FlexItem');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { render } from 'enzyme';
+import { FlexItem } from 'cf-component-flex';
 
-describe('FlexItem', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <FlexItem>Hello</FlexItem>,
-      // should equal
-      <div className="cf-flex__item">Hello</div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<FlexItem>Hello</FlexItem>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render collapsed', function() {
-    assertEqualJSX(
-      <FlexItem collapse>Hello</FlexItem>,
-      // should equal
-      <div className="cf-flex__item cf-flex__item--collapse">Hello</div>
-    );
-  });
+test('should render collapsed', () => {
+  const component = renderer.create(<FlexItem collapse>Hello</FlexItem>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render flex item styles', function() {
-    const wrapper = enzyme.render(
-      <FlexItem order={1} grow={2} shrink={3} basis="auto" alignSelf="center">
-        Hello
-      </FlexItem>
-    );
+test('should render flex item styles', () => {
+  const wrapper = render(
+    <FlexItem order={1} grow={2} shrink={3} basis="auto" alignSelf="center">
+      Hello
+    </FlexItem>
+  );
 
-    const css = wrapper.find('div').first().css();
-    expect(css['order']).to.equal('1');
-    expect(css['flex-grow']).to.equal('2');
-    expect(css['flex-shrink']).to.equal('3');
-    expect(css['flex-basis']).to.equal('auto');
-    expect(css['align-self']).to.equal('center');
-  });
+  const css = wrapper.find('div').first().css();
+  expect(css['order']).toBe('1');
+  expect(css['flex-grow']).toBe('2');
+  expect(css['flex-shrink']).toBe('3');
+  expect(css['flex-basis']).toBe('auto');
+  expect(css['align-self']).toBe('center');
 });

@@ -1,13 +1,13 @@
 {
   "name": "cf-util-text",
-  "description": "CloudFlare Text Util",
+  "description": "Cloudflare Text Util",
   "version": "2.0.1",
   "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
   "author": "James Kyle <jkyle@cloudflare.com>",
   "license": "BSD-3-Clause",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+  }
 }

@@ -1,5 +1,7 @@
 language: node_js
-node_js: 'node'
+node_js:
+  - "node"
+  - "6"
 env:
   - CXX=g++-4.8
 addons:
@@ -9,8 +11,9 @@ addons:
     packages:
       - g++-4.8
 before_script:
-  - npm run build
   - npm run bootstrap
 script:
   - npm run lint
-  - npm run examples:new
+  - npm test
+  - npm run build:styleguide
+  - npm run build

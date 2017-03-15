@@ -1,12 +1,8 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import Callout from 'cf-component-callout';
 
-const Callout = require('../../src/index');
+const CalloutComponent = () => (
+  <Callout title="Callout Title" content="Callout content." />
+);
 
-class Component extends React.Component {
-  render() {
-    return <Callout title="Callout Title" content="Callout content." />;
-  }
-}
-
-render(<Component />, document.getElementById('cf-component-callout--basic'));
+export default CalloutComponent;

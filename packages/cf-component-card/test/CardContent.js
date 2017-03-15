@@ -1,32 +1,19 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const CardContent = require('../src/CardContent');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { CardContent } from 'cf-component-card';
 
-describe('CardContent', function() {
-  it('should render without footer message', function() {
-    assertEqualJSX(
-      <CardContent title="Title">CardContent</CardContent>,
-      // should equal
-      <div className="cf-card__content">
-        <h3 className="cf-card__title">Title</h3>
-        CardContent
-      </div>
-    );
-  });
+test('should render without footer message', () => {
+  const component = renderer.create(
+    <CardContent title="Title">CardContent</CardContent>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render with footer message', function() {
-    assertEqualJSX(
-      <CardContent title="Title" footerMessage="Footer Message">
-        CardContent
-      </CardContent>,
-      // should equal
-      <div className="cf-card__content">
-        <h3 className="cf-card__title">Title</h3>
-        CardContent
-        <div className="cf-card__footer_message">
-          Footer Message
-        </div>
-      </div>
-    );
-  });
+test('should render with footer message', () => {
+  const component = renderer.create(
+    <CardContent title="Title" footerMessage="Footer Message">
+      CardContent
+    </CardContent>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

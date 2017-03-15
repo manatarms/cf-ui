@@ -1,41 +1,15 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Pagination = require('../src/Pagination');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { Pagination } from 'cf-component-pagination';
 
-function sanitizeId(str) {
-  return str.replace(/"cf-pagination-([0-9]+)"/ig, '"%id%"');
-}
+test('should render', () => {
+  const component = renderer.create(<Pagination>Pagination</Pagination>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-describe('Pagination', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Pagination>Pagination</Pagination>,
-      // should equal
-      <div className="cf-pagination">
-        <ul className="cf-pagination__list" role="navigation">
-          Pagination
-        </ul>
-      </div>
-    );
-  });
-
-  it('should render with info', function() {
-    assertEqualJSX(
-      <Pagination info="Pagination Info">Pagination</Pagination>,
-      // should equal
-      <div className="cf-pagination">
-        <ul
-          className="cf-pagination__list"
-          role="navigation"
-          aria-describedby="%id%"
-        >
-          Pagination
-        </ul>
-        <span id="%id%">
-          Pagination Info
-        </span>
-      </div>,
-      { sanitize: sanitizeId }
-    );
-  });
+test('should render with info', () => {
+  const component = renderer.create(
+    <Pagination info="Pagination Info">Pagination</Pagination>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

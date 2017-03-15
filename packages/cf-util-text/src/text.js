@@ -13,4 +13,4 @@ function setText(id, value) {
   text[id] = value;
 }
 
-module.exports = { getText, setText };
+export default { getText, setText };

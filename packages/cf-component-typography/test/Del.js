@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Del = require('../src/Del');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Del from '../src/Del';
 
-describe('Del', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Del>Del</Del>,
-      // should equal
-      <del className="cf-del">Del</del>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Del>Del</Del>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

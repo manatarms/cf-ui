@@ -1,17 +1,26 @@
-const React = require('react');
-const { PropTypes } = React;
-const Viewport = require('cf-component-viewport');
-const Select = require('cf-component-select');
+import React, { PropTypes } from 'react';
+import Viewport from 'cf-component-viewport';
+import Select from 'cf-component-select';
+
+const find = (list, condition) => {
+  let foundElement = undefined;
+  list.forEach(element => {
+    if (condition(element)) {
+      foundElement = element;
+    }
+  });
+  return foundElement;
+};
 
 class Tabs extends React.Component {
   getChildContext() {
     return {
-      activeTab: this.props.activeTab
+      active: this.props.active
     };
   }
 
   handleChange(id) {
-    if (id !== this.props.activeTab) {
+    if (id !== this.props.active) {
       this.props.onChange(id);
     }
   }
@@ -28,7 +37,7 @@ class Tabs extends React.Component {
         <Viewport size="mobile">
           <Select
             onChange={this.handleChange.bind(this)}
-            value={this.props.activeTab}
+            value={this.props.active}
             options={this.props.tabs.map(tab => {
               return {
                 value: tab.id,
@@ -40,7 +49,7 @@ class Tabs extends React.Component {
         <Viewport not size="mobile">
           <ul className="cf-tabs__group" role="tablist">
             {this.props.tabs.map(tab => {
-              const selected = tab.id === this.props.activeTab;
+              const selected = tab.id === this.props.active;
 
               let className = 'cf-tabs__item';
               if (selected) {
@@ -64,7 +73,9 @@ class Tabs extends React.Component {
             })}
           </ul>
         </Viewport>
-        {this.props.children}
+        {find(this.props.children, child => {
+          return child.props.id === this.props.active;
+        })}
       </section>
     );
   }
@@ -72,18 +83,18 @@ class Tabs extends React.Component {
 
 Tabs.propTypes = {
   onChange: PropTypes.func.isRequired,
-  activeTab: PropTypes.string.isRequired,
+  active: PropTypes.string.isRequired,
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired
     })
   ).isRequired,
-  children: PropTypes.node
+  children: PropTypes.arrayOf(PropTypes.element).isRequired
 };
 
 Tabs.childContextTypes = {
-  activeTab: PropTypes.string.isRequired
+  active: PropTypes.string.isRequired
 };
 
-module.exports = Tabs;
+export default Tabs;

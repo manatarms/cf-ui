@@ -1,25 +1,15 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Label = require('../src/Label');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Label from 'cf-component-label';
 
-describe('Label', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Label type="default">A Label</Label>,
-      // should equal
-      <span className="cf-label cf-label--default">
-        A Label
-      </span>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Label type="default">A Label</Label>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render with custom tagName', function() {
-    assertEqualJSX(
-      <Label type="default" tagName="small">A Label</Label>,
-      // should equal
-      <small className="cf-label cf-label--default">
-        A Label
-      </small>
-    );
-  });
+test('should render with custom tagName', () => {
+  const component = renderer.create(
+    <Label type="default" tagName="small">A Label</Label>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const ListItem = require('../src/ListItem');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { ListItem } from 'cf-component-list';
 
-describe('ListItem', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <ListItem>ListItem</ListItem>,
-      // should equal
-      <li className="cf-list__item">ListItem</li>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<ListItem>ListItem</ListItem>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

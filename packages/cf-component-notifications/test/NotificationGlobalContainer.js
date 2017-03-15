@@ -1,19 +1,12 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const NotificationGlobalContainer = require(
-  '../src/NotificationGlobalContainer'
-);
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { NotificationGlobalContainer } from 'cf-component-notifications';
 
-describe('NotificationGlobalContainer', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <NotificationGlobalContainer>
-        NotificationGlobalContainer
-      </NotificationGlobalContainer>,
-      // should equal
-      <div className="cf-notifications__global_container">
-        NotificationGlobalContainer
-      </div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(
+    <NotificationGlobalContainer>
+      NotificationGlobalContainer
+    </NotificationGlobalContainer>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

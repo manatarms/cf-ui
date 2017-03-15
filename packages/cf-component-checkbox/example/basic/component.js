@@ -1,12 +1,7 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import { Checkbox, CheckboxGroup } from 'cf-component-checkbox';
 
-const {
-  Checkbox,
-  CheckboxGroup
-} = require('../../src/index');
-
-class Component extends React.Component {
+class CheckboxComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,4 +66,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-checkbox--basic'));
+export default CheckboxComponent;

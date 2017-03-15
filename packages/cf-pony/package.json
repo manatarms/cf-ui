@@ -1,8 +1,10 @@
 {
   "name": "cf-pony",
-  "description": "CloudFlare ponyfills and utility methods",
+  "description": "Cloudflare ponyfills and utility methods",
   "version": "1.1.0",
   "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
   "author": "James Kyle <jkyle@cloudflare.com>",
   "license": "BSD-3-Clause",
   "publishConfig": {
@@ -21,6 +23,5 @@
     "string.prototype.trim": "^1.1.2",
     "string.prototype.trimleft": "^2.0.0",
     "string.prototype.trimright": "^2.0.0"
-  },
-  "devDependencies": {}
+  }
 }

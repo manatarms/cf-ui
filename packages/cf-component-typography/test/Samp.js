@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Samp = require('../src/Samp');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Samp from '../src/Samp';
 
-describe('Samp', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Samp>Samp</Samp>,
-      // should equal
-      <samp className="cf-samp">Samp</samp>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Samp>Samp</Samp>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

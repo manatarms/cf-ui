@@ -1,6 +1,5 @@
-const React = require('react');
-const { render } = require('react-dom');
-const { PaginationBuilder } = require('../../src/index');
+import React from 'react';
+import { PaginationBuilder } from 'cf-builder-pagination';
 
 function getStartAndEnd(page, pageSize) {
   const start = (page - 1) * pageSize;
@@ -18,7 +17,7 @@ function hasAllItems(items, start, end) {
   return true;
 }
 
-class Component extends React.Component {
+class BuilderPagination extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -89,4 +88,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-builder-pagination--basic'));
+export default BuilderPagination;

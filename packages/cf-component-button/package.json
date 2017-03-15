@@ -1,19 +1,19 @@
 {
   "name": "cf-component-button",
-  "description": "CloudFlare Button Component",
+  "description": "Cloudflare Button Component",
   "version": "4.0.0",
   "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
   "author": "James Kyle <jkyle@cloudflare.com>",
   "license": "BSD-3-Clause",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
   },
   "dependencies": {
-    "cf-style-container": "^0.0.2",
-    "react": "^0.14.2 || ^15.0.0-0"
+    "cf-style-container": "^0.0.2"
   },
-  "devDependencies": {
-    "assert-equal-jsx": "^1.0.0",
-    "react-dom": "^15.0.0-0"
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0"
   }
 }

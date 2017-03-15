@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Code = require('../src/Code');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { Code } from 'cf-component-code';
 
-describe('Code', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Code>Hello</Code>,
-      // should equal
-      <code className="cf-code">Hello</code>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Code>Hello</Code>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

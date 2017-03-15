@@ -1,6 +1,6 @@
 # cf-util-http
 
-> CloudFlare HTTP Util
+> Cloudflare HTTP Util
 
 This utility library is a simple interface that hides away the client-side http
 implementation being used so that it can easily be swapped out for something
@@ -15,7 +15,7 @@ $ npm install cf-util-http
 ## Usage
 
 ```js
-const http = require('cf-util-http');
+import http from 'cf-util-http';
 
 http.beforeSend(opts => {
   opts.url = '/api/v4' + opts.url;

@@ -1,12 +1,7 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import { Code, CodeBlock } from 'cf-component-code';
 
-const {
-  Code,
-  CodeBlock
-} = require('../../src/index');
-
-class Component extends React.Component {
+class CodeComponent extends React.Component {
   render() {
     return (
       <div>
@@ -17,4 +12,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-code--basic'));
+export default CodeComponent;

@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const DropdownSeparator = require('../src/DropdownSeparator');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { DropdownSeparator } from 'cf-component-dropdown';
 
-describe('DropdownSeparator', function() {
-  it('should render with to', function() {
-    assertEqualJSX(
-      <DropdownSeparator />,
-      // should equal
-      <div className="cf-dropdown__separator" role="separator" />
-    );
-  });
+test('should render with to', () => {
+  const component = renderer.create(<DropdownSeparator />);
+  expect(component.toJSON()).toMatchSnapshot();
 });

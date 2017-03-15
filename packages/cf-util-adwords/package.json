@@ -1,15 +1,17 @@
 {
   "name": "cf-util-adwords",
-  "description": "CloudFlare Google AdWords Util",
+  "description": "Cloudflare Google AdWords Util",
   "version": "4.0.1",
   "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
   "author": "James Kyle <jkyle@cloudflare.com>",
   "license": "BSD-3-Clause",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
   },
   "dependencies": {
-    "lodash": "^4.1.0"
-  },
-  "devDependencies": {}
+    "lodash": "^4.1.0",
+    "promisescript": "^1.2.0"
+  }
 }

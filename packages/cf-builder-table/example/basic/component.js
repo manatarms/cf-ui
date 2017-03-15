@@ -1,19 +1,15 @@
-const React = require('react');
-const { render } = require('react-dom');
-const { createStore, combineReducers, applyMiddleware } = require('redux');
-const { Provider, connect } = require('react-redux');
-const thunk = require('redux-thunk').default;
-const {
-  TableBuilder,
-  tableReducer,
-  tableActions
-} = require('../../src/index');
-const { TableCell } = require('cf-component-table');
-const { Button } = require('cf-component-button');
+import React from 'react';
+import { connect } from 'react-redux';
+import { TableBuilder, tableReducer, tableActions } from 'cf-builder-table';
+import { TableCell } from 'cf-component-table';
+import { Button as ButtonUnstyled, ButtonTheme } from 'cf-component-button';
+import { applyTheme } from 'cf-style-container';
+
+const Button = applyTheme(ButtonUnstyled, ButtonTheme);
 
 const EXAMPLE_TABLE = 'EXAMPLE_TABLE';
 
-class Component extends React.Component {
+class BuilderTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -76,7 +72,10 @@ class Component extends React.Component {
             cell: cells => {
               return (
                 <TableCell key="actions">
-                  <Button onClick={this.handleClick.bind(null, cells.id)}>
+                  <Button
+                    type="default"
+                    onClick={this.handleClick.bind(null, cells.id)}
+                  >
                     Update
                   </Button>
                 </TableCell>
@@ -89,17 +88,4 @@ class Component extends React.Component {
   }
 }
 
-const ConnectedComponent = connect(() => ({}))(Component);
-
-const reducer = combineReducers({
-  tables: tableReducer
-});
-
-const store = createStore(reducer, {}, applyMiddleware(thunk));
-
-render(
-  <Provider store={store}>
-    <ConnectedComponent />
-  </Provider>,
-  document.getElementById('cf-builder-table--basic')
-);
+export default connect(() => ({}))(BuilderTable);

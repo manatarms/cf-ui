@@ -1,18 +1,17 @@
-const React = require('react');
-const { render } = require('react-dom');
-
-const {
+import React from 'react';
+import {
   NotificationList,
   Notification,
   NotificationGlobalContainer
-} = require('../../src/index');
-const {
-  Button
-} = require('cf-component-button');
+} from 'cf-component-notifications';
+import { Button as ButtonUnstyled, ButtonTheme } from 'cf-component-button';
+import { applyTheme } from 'cf-style-container';
+
+const Button = applyTheme(ButtonUnstyled, ButtonTheme);
 
 let UNIQUE_ID = 0;
 
-class Component extends React.Component {
+class NofiticationsComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,7 +64,7 @@ class Component extends React.Component {
     return (
       <div>
         <Button
-          type="error"
+          type="danger"
           onClick={this.handleAdd.bind(this, 'error', false, 4000)}
         >
           Add Error Notification
@@ -116,7 +115,4 @@ class Component extends React.Component {
   }
 }
 
-render(
-  <Component />,
-  document.getElementById('cf-component-notifications--basic')
-);
+export default NofiticationsComponent;

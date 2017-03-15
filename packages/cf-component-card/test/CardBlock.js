@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const CardBlock = require('../src/CardBlock');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { CardBlock } from 'cf-component-card';
 
-describe('CardBlock', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <CardBlock>CardBlock</CardBlock>,
-      // should equal
-      <div className="cf-card__block">CardBlock</div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<CardBlock>CardBlock</CardBlock>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

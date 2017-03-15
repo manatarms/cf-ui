@@ -1,60 +1,17 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Tabs = require('../src/Tabs');
-const TabsPanel = require('../src/TabsPanel');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { Tabs, TabsPanel } from 'cf-component-tabs';
 
-describe('Tabs', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Tabs
-        activeTab="2"
-        tabs={[{ id: '1', label: 'One' }, { id: '2', label: 'Two' }]}
-        onChange={function() {}}
-      >
-        <TabsPanel id="1">One</TabsPanel>
-        <TabsPanel id="2">Two</TabsPanel>
-      </Tabs>,
-      // should equal
-      <section className="cf-tabs">
-        <ul className="cf-tabs__group" role="tablist">
-          <li
-            role="tab"
-            tabIndex="0"
-            aria-controls="1"
-            aria-selected="false"
-            className="cf-tabs__item"
-          >
-            One
-          </li>
-          <li
-            role="tab"
-            tabIndex="0"
-            aria-controls="2"
-            aria-selected="true"
-            className="cf-tabs__item cf-tabs__item--active"
-          >
-            Two
-          </li>
-        </ul>
-        <div
-          className="cf-tabs__panel"
-          role="tabpanel"
-          aria-labelledby="1"
-          aria-hidden="true"
-          style={{ display: 'none' }}
-        >
-          One
-        </div>
-        <div
-          className="cf-tabs__panel"
-          role="tabpanel"
-          aria-labelledby="2"
-          aria-hidden="false"
-          style={{ display: 'block' }}
-        >
-          Two
-        </div>
-      </section>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(
+    <Tabs
+      active="2"
+      tabs={[{ id: '1', label: 'One' }, { id: '2', label: 'Two' }]}
+      onChange={() => {}}
+    >
+      <TabsPanel id="1">One</TabsPanel>
+      <TabsPanel id="2">Two</TabsPanel>
+    </Tabs>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

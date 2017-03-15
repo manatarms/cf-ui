@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Cite = require('../src/Cite');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Cite from '../src/Cite';
 
-describe('Cite', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Cite>Cite</Cite>,
-      // should equal
-      <cite className="cf-cite">Cite</cite>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Cite>Cite</Cite>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

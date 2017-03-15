@@ -1,21 +1,15 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const TableHead = require('../src/TableHead');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { TableHead } from 'cf-component-table';
 
-describe('TableHead', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <TableHead>TableHead</TableHead>,
-      // should equal
-      <thead className="cf-table__head">TableHead</thead>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<TableHead>TableHead</TableHead>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render extra class name', function() {
-    assertEqualJSX(
-      <TableHead className="extra">TableHead</TableHead>,
-      // should equal
-      <thead className="cf-table__head extra">TableHead</thead>
-    );
-  });
+test('should render extra class name', () => {
+  const component = renderer.create(
+    <TableHead className="extra">TableHead</TableHead>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

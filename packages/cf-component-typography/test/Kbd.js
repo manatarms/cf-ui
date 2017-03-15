@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Kbd = require('../src/Kbd');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Kbd from '../src/Kbd';
 
-describe('Kbd', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Kbd>Kbd</Kbd>,
-      // should equal
-      <kbd className="cf-kbd">Kbd</kbd>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Kbd>Kbd</Kbd>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

@@ -1,101 +1,93 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const { trackFocus, getCurrentFocus } = require('cf-test-focus');
-const { equal: assertEqual } = require('assert');
-const { render, unmountComponentAtNode } = require('react-dom');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { trackFocus, getCurrentFocus } from 'cf-test-focus';
+import { render, unmountComponentAtNode } from 'react-dom';
+import { Dropdown, DropdownLink } from 'cf-component-dropdown';
+import jsdom from 'jsdom';
 
-const Dropdown = require('../src/Dropdown');
-const DropdownLink = require('../src/DropdownLink');
+test('should render', () => {
+  const component = renderer.create(
+    <Dropdown onClose={() => {}}>
+      Dropdown
+    </Dropdown>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-describe('Dropdown', function() {
-  it('should render', function() {
-    assertEqualJSX(
+test('should render with align', () => {
+  const component = renderer.create(
+    <Dropdown align="right" onClose={() => {}}>
+      Dropdown
+    </Dropdown>
+  );
+});
+
+describe('interactions', () => {
+  beforeEach(function() {
+    const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
+    global.document = doc;
+    global.window = doc.defaultView;
+    global.root = global.document.createElement('div');
+    global.document.body.appendChild(global.root);
+  });
+
+  afterEach(function() {
+    unmountComponentAtNode(global.root);
+    global.document.body.removeChild(global.root);
+    delete global.root;
+  });
+
+  test('should call `onClose` when the `esc` key is pressed', () => {
+    var called = false;
+    var onClose = function() {
+      called = true;
+    };
+
+    var dom = <Dropdown onClose={onClose} />;
+    var instance = render(dom, global.root);
+
+    instance.handleDocumentKeydown({ keyCode: 27 });
+    expect(called).toBeTruthy();
+  });
+
+  test('should be able to navigate with the up and down keys', () => {
+    trackFocus();
+
+    const down = { keyCode: 40, preventDefault() {} };
+    const up = { keyCode: 38, preventDefault() {} };
+
+    const getFocusedHref = () => getCurrentFocus().getAttribute('href');
+
+    const dom = (
       <Dropdown onClose={() => {}}>
-        Dropdown
-      </Dropdown>,
-      // should equal
-      <ul role="menu" className="cf-dropdown cf-dropdown--left">
-        Dropdown
-      </ul>
+        <DropdownLink to="one" />
+        <DropdownLink to="two" />
+        <DropdownLink to="three" />
+      </Dropdown>
     );
-  });
+    const instance = render(dom, global.root);
 
-  it('should render with align', function() {
-    assertEqualJSX(
-      <Dropdown align="right" onClose={() => {}}>
-        Dropdown
-      </Dropdown>,
-      // should equal
-      <ul role="menu" className="cf-dropdown cf-dropdown--right">
-        Dropdown
-      </ul>
-    );
-  });
+    instance.handleDocumentKeydown(down);
+    expect(getFocusedHref()).toBe('one');
 
-  describe('interactions', function() {
-    beforeEach(function() {
-      this.root = global.document.createElement('div');
-      global.document.body.appendChild(this.root);
-    });
+    instance.handleDocumentKeydown(down);
+    expect(getFocusedHref()).toBe('two');
 
-    afterEach(function() {
-      unmountComponentAtNode(this.root);
-      global.document.body.removeChild(this.root);
-      delete this.root;
-    });
+    instance.handleDocumentKeydown(down);
+    instance.handleDocumentKeydown(down);
+    expect(getFocusedHref()).toBe('three');
 
-    it('should call `onClose` when the `esc` key is pressed', function() {
-      var called = false;
-      var onClose = function() {
-        called = true;
-      };
+    instance.handleDocumentKeydown(up);
+    expect(getFocusedHref()).toBe('two');
 
-      var dom = <Dropdown onClose={onClose} />;
-      var instance = render(dom, this.root);
+    const two = getCurrentFocus();
 
-      instance.handleDocumentKeydown({ keyCode: 27 });
-      assertEqual(called, true);
-    });
+    instance.handleDocumentKeydown(up);
+    instance.handleDocumentKeydown(up);
+    expect(getFocusedHref()).toBe('one');
 
-    it('should be able to navigate with the up and down keys', function() {
-      trackFocus();
-
-      const down = { keyCode: 40, preventDefault() {} };
-      const up = { keyCode: 38, preventDefault() {} };
-
-      const getFocusedHref = () => getCurrentFocus().getAttribute('href');
-
-      const dom = (
-        <Dropdown onClose={() => {}}>
-          <DropdownLink to="one" />
-          <DropdownLink to="two" />
-          <DropdownLink to="three" />
-        </Dropdown>
-      );
-      const instance = render(dom, this.root);
-
-      instance.handleDocumentKeydown(down);
-      assertEqual(getFocusedHref(), 'one');
-
-      instance.handleDocumentKeydown(down);
-      assertEqual(getFocusedHref(), 'two');
-
-      instance.handleDocumentKeydown(down);
-      instance.handleDocumentKeydown(down);
-      assertEqual(getFocusedHref(), 'three');
-
-      instance.handleDocumentKeydown(up);
-      assertEqual(getFocusedHref(), 'two');
-
-      const two = getCurrentFocus();
-
-      instance.handleDocumentKeydown(up);
-      instance.handleDocumentKeydown(up);
-      assertEqual(getFocusedHref(), 'one');
-
-      two.focus();
-      instance.handleDocumentKeydown(down);
-      assertEqual(getFocusedHref(), 'three');
-    });
+    two.focus();
+    instance.handleDocumentKeydown(down);
+    expect(getFocusedHref()).toBe('three');
   });
 });

@@ -1,11 +1,10 @@
-const React = require('react');
-const { PropTypes } = React;
-const assertEqualJSX = require('assert-equal-jsx');
-const TabsPanel = require('../src/TabsPanel');
+import React, { PropTypes } from 'react';
+import renderer from 'react-test-renderer';
+import { TabsPanel } from 'cf-component-tabs';
 
 class Context extends React.Component {
   getChildContext() {
-    return { activeTab: this.props.activeTab };
+    return { active: this.props.active };
   }
   render() {
     return this.props.children;
@@ -13,48 +12,28 @@ class Context extends React.Component {
 }
 
 Context.propTypes = {
-  activeTab: PropTypes.string.isRequired,
+  active: PropTypes.string.isRequired,
   children: PropTypes.node
 };
 
 Context.childContextTypes = {
-  activeTab: PropTypes.string.isRequired
+  active: PropTypes.string.isRequired
 };
 
-describe('TabsPanel', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Context activeTab="something-else">
-        <TabsPanel id="tab">TabsPanel</TabsPanel>
-      </Context>,
-      // should equal
-      <div
-        className="cf-tabs__panel"
-        role="tabpanel"
-        aria-labelledby="tab"
-        aria-hidden="true"
-        style={{ display: 'none' }}
-      >
-        TabsPanel
-      </div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(
+    <Context active="something-else">
+      <TabsPanel id="tab">TabsPanel</TabsPanel>
+    </Context>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render active', function() {
-    assertEqualJSX(
-      <Context activeTab="tab">
-        <TabsPanel id="tab">TabsPanel</TabsPanel>
-      </Context>,
-      // should equal
-      <div
-        className="cf-tabs__panel"
-        role="tabpanel"
-        aria-labelledby="tab"
-        aria-hidden="false"
-        style={{ display: 'block' }}
-      >
-        TabsPanel
-      </div>
-    );
-  });
+test('should render active', () => {
+  const component = renderer.create(
+    <Context active="tab">
+      <TabsPanel id="tab">TabsPanel</TabsPanel>
+    </Context>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

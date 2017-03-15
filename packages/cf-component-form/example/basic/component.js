@@ -1,20 +1,22 @@
-const React = require('react');
-const { render } = require('react-dom');
-const {
+import React from 'react';
+import {
   Form,
   FormHeader,
   FormFooter,
   FormFieldset,
   FormLabel,
   FormFieldError
-} = require('../../src/index');
-const { Flex, FlexItem } = require('cf-component-flex');
-const { Button } = require('cf-component-button');
-const Input = require('cf-component-input');
-const Select = require('cf-component-select');
-const Textarea = require('cf-component-textarea');
+} from 'cf-component-form';
+import { Flex, FlexItem } from 'cf-component-flex';
+import Input from 'cf-component-input';
+import Select from 'cf-component-select';
+import Textarea from 'cf-component-textarea';
+import { Button as ButtonUnstyled, ButtonTheme } from 'cf-component-button';
+import { applyTheme } from 'cf-style-container';
 
-class Component extends React.Component {
+const Button = applyTheme(ButtonUnstyled, ButtonTheme);
+
+class FormComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -121,4 +123,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-form--basic'));
+export default FormComponent;

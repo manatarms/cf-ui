@@ -1,20 +1,10 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const CardToolbar = require('../src/CardToolbar');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import CardToolbar from '../src/CardToolbar';
 
-describe('CardToolbar', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <CardToolbar controls={'Controls'} links={'Links'} />,
-      // should equal
-      <div className="cf-card__toolbar">
-        <div className="cf-card__toolbar_controls">
-          Controls
-        </div>
-        <div className="cf-card__toolbar_links" role="tablist">
-          Links
-        </div>
-      </div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(
+    <CardToolbar controls={'Controls'} links={'Links'} />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

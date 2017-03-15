@@ -1,6 +1,6 @@
 # cf-component-tabs
 
-> CloudFlare Tabs Component
+> Cloudflare Tabs Component
 
 ## Installation
 
@@ -10,36 +10,33 @@ $ npm install cf-component-tabs
 
 ## Usage
 
-```js
-const React = require('react');
+```jsx
+import React from 'react';
+import { Tabs, TabsPanel } from 'cf-component-tabs';
 
-const {
-  Tabs,
-  TabsPanel
-} = require('../../src/index');
-
-class Application extends React.Component {
-
+class TabsComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: 'one'
+      active: 'one'
     };
   }
 
   handleTabChange(id) {
-    this.setState({ activeTab: id });
+    this.setState({ active: id });
   }
 
   render() {
     return (
       <Tabs
-        activeTab={this.state.activeTab}
+        active={this.state.active}
         tabs={[
           { id: 'one', label: 'Tab One' },
-          { id: 'two', label: 'Tab Two' }
+          { id: 'two', label: 'Tab Two' },
+          { id: 'three', label: 'Tab Three' }
         ]}
-        onChange={this.handleTabChange.bind(this)}>
+        onChange={this.handleTabChange.bind(this)}
+      >
 
         <TabsPanel id="one">
           <h1>Tab One</h1>
@@ -48,8 +45,14 @@ class Application extends React.Component {
         <TabsPanel id="two">
           <h1>Tab Two</h1>
         </TabsPanel>
+
+        <TabsPanel id="three">
+          <h1>Tab Three</h1>
+        </TabsPanel>
       </Tabs>
     );
   }
 }
+
+export default TabsComponent;
 ```

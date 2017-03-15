@@ -1,23 +1,17 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const TableHeadCell = require('../src/TableHeadCell');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { TableHeadCell } from 'cf-component-table';
 
-describe('TableHeadCell', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <TableHeadCell>TableHeadCell</TableHeadCell>,
-      // should equal
-      <th className="cf-table__cell cf-table__cell--head">TableHeadCell</th>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(
+    <TableHeadCell>TableHeadCell</TableHeadCell>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render extra class name', function() {
-    assertEqualJSX(
-      <TableHeadCell className="extra">TableHeadCell</TableHeadCell>,
-      // should equal
-      <th className="cf-table__cell cf-table__cell--head extra">
-        TableHeadCell
-      </th>
-    );
-  });
+test('should render extra class name', () => {
+  const component = renderer.create(
+    <TableHeadCell className="extra">TableHeadCell</TableHeadCell>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

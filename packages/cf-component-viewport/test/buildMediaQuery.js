@@ -1,40 +1,33 @@
-const { equal: assertEqual } = require('assert');
-const buildMediaQuery = require('../src/buildMediaQuery');
+import buildMediaQuery from '../src/buildMediaQuery';
 
-describe('buildMediaQuery', function() {
-  it('should build minWidth query', function() {
-    assertEqual(buildMediaQuery({ minWidth: '10em' }), '(min-width: 10em)');
-  });
+test('should build minWidth query', () => {
+  expect(buildMediaQuery({ minWidth: '10em' })).toEqual('(min-width: 10em)');
+});
 
-  it('should build maxWidth query', function() {
-    assertEqual(buildMediaQuery({ maxWidth: '20em' }), '(max-width: 20em)');
-  });
+test('should build maxWidth query', () => {
+  expect(buildMediaQuery({ maxWidth: '20em' })).toEqual('(max-width: 20em)');
+});
 
-  it('should build minWidth/maxWidth query', function() {
-    assertEqual(
-      buildMediaQuery({ minWidth: '10em', maxWidth: '20em' }),
-      '(min-width: 10em) and (max-width: 20em)'
-    );
-  });
+test('should build minWidth/maxWidth query', () => {
+  expect(buildMediaQuery({ minWidth: '10em', maxWidth: '20em' })).toEqual(
+    '(min-width: 10em) and (max-width: 20em)'
+  );
+});
 
-  it('should build minWidth/not query', function() {
-    assertEqual(
-      buildMediaQuery({ minWidth: '10em' }, true),
-      'not all and (min-width: 10em)'
-    );
-  });
+test('should build minWidth/not query', () => {
+  expect(buildMediaQuery({ minWidth: '10em' }, true)).toEqual(
+    'not all and (min-width: 10em)'
+  );
+});
 
-  it('should build maxWidth/not query', function() {
-    assertEqual(
-      buildMediaQuery({ maxWidth: '20em' }, true),
-      'not all and (max-width: 20em)'
-    );
-  });
+test('should build maxWidth/not query', () => {
+  expect(buildMediaQuery({ maxWidth: '20em' }, true)).toEqual(
+    'not all and (max-width: 20em)'
+  );
+});
 
-  it('should build minWidth/maxWidth/not query', function() {
-    assertEqual(
-      buildMediaQuery({ minWidth: '10em', maxWidth: '20em' }, true),
-      'not all and (min-width: 10em) and (max-width: 20em)'
-    );
-  });
+test('should build minWidth/maxWidth/not query', () => {
+  expect(buildMediaQuery({ minWidth: '10em', maxWidth: '20em' }, true)).toEqual(
+    'not all and (min-width: 10em) and (max-width: 20em)'
+  );
 });

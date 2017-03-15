@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Strong = require('../src/Strong');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Strong from '../src/Strong';
 
-describe('Strong', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Strong>Strong</Strong>,
-      // should equal
-      <strong className="cf-strong">Strong</strong>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Strong>Strong</Strong>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

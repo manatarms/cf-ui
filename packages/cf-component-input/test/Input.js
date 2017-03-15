@@ -1,109 +1,60 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Input = require('../src/Input');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Input from 'cf-component-input';
 
-describe('Input', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Input name="example" value="content" onChange={() => {}} />,
-      // should equal
-      <input
-        type="text"
-        className="cf-input cf-input--text"
-        name="example"
-        value="content"
-        onChange={() => {}}
-      />
-    );
-  });
-
-  it('should render with type', function() {
-    assertEqualJSX(
-      <Input
-        type="search"
-        name="example"
-        value="content"
-        onChange={() => {}}
-      />,
-      // should equal
-      <input
-        type="search"
-        className="cf-input cf-input--search"
-        name="example"
-        value="content"
-        onChange={() => {}}
-      />
-    );
-  });
-
-  it('should render with error', function() {
-    assertEqualJSX(
-      <Input name="example" value="" invalid onChange={() => {}} />,
-      // should equal
-      <input
-        type="text"
-        className="cf-input cf-input--text cf-input--invalid"
-        name="example"
-        value=""
-        onChange={() => {}}
-      />
-    );
-  });
-
-  it('should render with placeholder', function() {
-    assertEqualJSX(
-      <Input
-        name="example"
-        value=""
-        placeholder="placeholder"
-        onChange={() => {}}
-      />,
-      // should equal
-      <input
-        type="text"
-        className="cf-input cf-input--text"
-        name="example"
-        value=""
-        placeholder="placeholder"
-        onChange={() => {}}
-      />
-    );
-  });
-
-  it('should render with autocomplete', function() {
-    assertEqualJSX(
-      <Input name="example" value="" autoComplete="off" onChange={() => {}} />,
-      <input
-        type="text"
-        className="cf-input cf-input--text"
-        name="example"
-        value=""
-        autoComplete="off"
-        onChange={() => {}}
-      />
-    );
-  });
-
-  it(
-    'should pass all props down to the inner input and merge classnames',
-    function() {
-      assertEqualJSX(
-        <Input
-          className="klass"
-          disabled
-          invalid
-          type="number"
-          data-shadowed={true}
-          min={3}
-        />,
-        <input
-          className="cf-input cf-input--number cf-input--invalid klass"
-          disabled="true"
-          type="number"
-          data-shadowed="true"
-          min="3"
-        />
-      );
-    }
+test('should render', () => {
+  const component = renderer.create(
+    <Input name="example" value="content" onChange={() => {}} />
   );
+  expect(component.toJSON()).toMatchSnapshot();
+});
+
+test('should render with type', () => {
+  const component = renderer.create(
+    <Input type="search" name="example" value="content" onChange={() => {}} />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
+
+test('should render with error', () => {
+  const component = renderer.create(
+    <Input name="example" value="" invalid onChange={() => {}} />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
+
+test('should render with placeholder', () => {
+  const component = renderer.create(
+    <Input
+      name="example"
+      value=""
+      placeholder="placeholder"
+      onChange={() => {}}
+    />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
+
+test('should render with autocomplete', () => {
+  const component = renderer.create(
+    <Input name="example" value="" autoComplete="off" onChange={() => {}} />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
+
+test('should pass all props down to the inner input and merge classnames', () => {
+  const component = renderer.create(
+    <Input
+      className="klass"
+      name="example"
+      value=""
+      onChange={() => {}}
+      disabled
+      invalid
+      type="number"
+      data-shadowed={true}
+      min={3}
+    />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

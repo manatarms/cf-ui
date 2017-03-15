@@ -1,13 +1,10 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const HeadingCaption = require('../src/HeadingCaption');
+import React from 'react';
+import { HeadingCaption } from 'cf-component-heading';
+import renderer from 'react-test-renderer';
 
-describe('HeadingCaption', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <HeadingCaption>Heading Caption</HeadingCaption>,
-      // should equal
-      <small className="cf-heading__caption">Heading Caption</small>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(
+    <HeadingCaption>Heading Caption</HeadingCaption>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

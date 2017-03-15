@@ -1,21 +1,13 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const FormLabel = require('../src/FormLabel');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { FormLabel } from 'cf-component-form';
 
-describe('FormLabel', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <FormLabel>FormLabel</FormLabel>,
-      // should equal
-      <label className="cf-form__label">FormLabel</label>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<FormLabel>FormLabel</FormLabel>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render hidden', function() {
-    assertEqualJSX(
-      <FormLabel hidden>FormLabel</FormLabel>,
-      // should equal
-      <label className="cf-form__label cf-form__label--hidden">FormLabel</label>
-    );
-  });
+test('should render hidden', function() {
+  const component = renderer.create(<FormLabel hidden>FormLabel</FormLabel>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

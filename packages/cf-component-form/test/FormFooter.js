@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const FormFooter = require('../src/FormFooter');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { FormFooter } from 'cf-component-form';
 
-describe('FormFooter', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <FormFooter>FormFooter</FormFooter>,
-      // should equal
-      <div className="cf-form__footer">FormFooter</div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<FormFooter>FormFooter</FormFooter>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

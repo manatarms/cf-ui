@@ -1,7 +1,5 @@
-const React = require('react');
-const { render } = require('react-dom');
-
-const {
+import React from 'react';
+import {
   Modal,
   ModalHeader,
   ModalTitle,
@@ -9,15 +7,15 @@ const {
   ModalBody,
   ModalFooter,
   ModalActions
-} = require('../../src/index');
-const {
-  GatewayDest,
-  GatewayProvider
-} = require('react-gateway');
-const ReactModal2 = require('react-modal2');
-const { Button } = require('cf-component-button');
+} from 'cf-component-modal';
+import { GatewayDest, GatewayProvider } from 'react-gateway';
+import ReactModal2 from 'react-modal2';
+import { Button as ButtonUnstyled, ButtonTheme } from 'cf-component-button';
+import { applyTheme } from 'cf-style-container';
 
-class Component extends React.Component {
+const Button = applyTheme(ButtonUnstyled, ButtonTheme);
+
+class ModalComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,7 +43,9 @@ class Component extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={this.handleRequestOpen}>Open Modal</Button>
+        <Button type="default" onClick={this.handleRequestOpen}>
+          Open Modal
+        </Button>
         <Modal
           width={this.state.width}
           isOpen={this.state.isModalOpen}
@@ -87,13 +87,13 @@ class Application extends React.Component {
   }
 }
 
-const root = document.getElementById('cf-component-modal--basic');
-
+const root = document.body;
 ReactModal2.getApplicationElement = () => root;
 
-render(
+const finalComponent = () => (
   <Application>
-    <Component />
-  </Application>,
-  root
+    <ModalComponent />
+  </Application>
 );
+
+export default finalComponent;

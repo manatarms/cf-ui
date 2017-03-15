@@ -1,9 +1,7 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import Input from 'cf-component-input';
 
-const Input = require('../../src/index');
-
-class Component extends React.Component {
+class InputComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,4 +37,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-input--basic'));
+export default InputComponent;

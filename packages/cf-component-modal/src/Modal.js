@@ -1,8 +1,7 @@
-const React = require('react');
-const { PropTypes } = React;
-const ReactModal2 = require('react-modal2').default;
-const { Gateway } = require('react-gateway');
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+import React, { PropTypes } from 'react';
+import { default as ReactModal2 } from 'react-modal2';
+import { Gateway } from 'react-gateway';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Modal extends React.Component {
   render() {
@@ -29,7 +28,6 @@ class Modal extends React.Component {
             <div className="cf-modal__backdrop-scroller">
               <div className="cf-modal__backdrop-outer">
                 <ReactModal2
-                  ref="modal"
                   key="modal"
                   backdropClassName="cf-modal__backdrop"
                   modalClassName={modalClassName}
@@ -62,4 +60,4 @@ Modal.defaultProps = {
   closeOnBackdropClick: true
 };
 
-module.exports = Modal;
+export default Modal;

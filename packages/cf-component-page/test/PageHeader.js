@@ -1,26 +1,15 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const PageHeader = require('../src/PageHeader');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { PageHeader } from 'cf-component-page';
 
-describe('PageHeader', function() {
-  it('should render title', function() {
-    assertEqualJSX(
-      <PageHeader title="Title" />,
-      // should equal
-      <header className="cf-page__header">
-        <h1 className="cf-page__title">Title</h1>
-      </header>
-    );
-  });
+test('should render title', () => {
+  const component = renderer.create(<PageHeader title="Title" />);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render title/subtitle', function() {
-    assertEqualJSX(
-      <PageHeader title="Title" subtitle="Subtitle" />,
-      // should equal
-      <header className="cf-page__header">
-        <h1 className="cf-page__title">Title</h1>
-        <p className="cf-page__subtitle">Subtitle</p>
-      </header>
-    );
-  });
+test('should render title/subtitle', () => {
+  const component = renderer.create(
+    <PageHeader title="Title" subtitle="Subtitle" />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

@@ -1,7 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
 import ip from 'ip';
-import { alias } from './alias';
 import { HOT_RELOAD_PORT, SRC_DIR, BUILD_DIR } from './constants';
 
 export default {
@@ -27,6 +26,10 @@ export default {
           plugins: ['transform-object-rest-spread'],
           presets: [['es2015', { modules: false }], 'react']
         }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -40,12 +43,11 @@ export default {
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify('development') }
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
+    //new webpack.NoEmitOnErrorsPlugin()
   ],
   resolve: {
-    alias,
     extensions: ['.js', '.json'],
-    modules: ['node_modules']
+    modules: ['styleguide', 'node_modules']
   }
 };

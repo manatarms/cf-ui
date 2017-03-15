@@ -1,16 +1,10 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import Loading from 'cf-component-loading';
 
-const Loading = require('../../src/index');
+const LoadingComponent = () => (
+  <div>
+    <Loading />
+  </div>
+);
 
-class Component extends React.Component {
-  render() {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
-  }
-}
-
-render(<Component />, document.getElementById('cf-component-loading--basic'));
+export default LoadingComponent;

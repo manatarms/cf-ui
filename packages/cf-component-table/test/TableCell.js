@@ -1,29 +1,22 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const TableCell = require('../src/TableCell');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { TableCell } from 'cf-component-table';
 
-describe('TableCell', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <TableCell>TableCell</TableCell>,
-      // should equal
-      <td className="cf-table__cell">TableCell</td>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<TableCell>TableCell</TableCell>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render extra class name', function() {
-    assertEqualJSX(
-      <TableCell className="extra">TableCell</TableCell>,
-      // should equal
-      <td className="cf-table__cell extra">TableCell</td>
-    );
-  });
+test('should render extra class name', () => {
+  const component = renderer.create(
+    <TableCell className="extra">TableCell</TableCell>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render with align', function() {
-    assertEqualJSX(
-      <TableCell align="center">TableCell</TableCell>,
-      // should equal
-      <td className="cf-table__cell cf-table__cell--align-center">TableCell</td>
-    );
-  });
+test('should render with align', () => {
+  const component = renderer.create(
+    <TableCell align="center">TableCell</TableCell>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

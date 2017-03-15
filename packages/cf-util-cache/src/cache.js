@@ -1,6 +1,6 @@
-const createLogger = require('cf-util-logger');
-const { localStorage } = require('./storage');
-const { isArray, compact, now } = require('lodash');
+import createLogger from 'cf-util-logger';
+import { isArray, compact, now } from 'lodash';
+import { localStorage } from './storage';
 
 const logInfo = createLogger('cache:info');
 const logWarning = createLogger('cache:warning');
@@ -65,4 +65,4 @@ function clear() {
   localStorage.clear();
 }
 
-module.exports = { get, set, remove, has, clear };
+export default { get, set, remove, has, clear };

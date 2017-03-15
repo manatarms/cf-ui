@@ -1,7 +1,5 @@
-const React = require('react');
-const { render } = require('react-dom');
-
-const {
+import React from 'react';
+import {
   Abbr,
   Cite,
   Del,
@@ -17,33 +15,26 @@ const {
   Sup,
   Underline,
   Var
-} = require('../../src/index');
+} from 'cf-component-typography';
 
-class Component extends React.Component {
-  render() {
-    return (
-      <div>
-        <Abbr title="Abbreviation">Abbr</Abbr>
-        <Cite>Cite</Cite>
-        <Del>Del</Del>
-        <Em>Em</Em>
-        <Ins>Ins</Ins>
-        <Kbd>Kbd</Kbd>
-        <Mark>Mark</Mark>
-        <Samp>Samp</Samp>
-        <Small>Small</Small>
-        <Strike>Strike</Strike>
-        <Strong>Strong</Strong>
-        <Sub>Sub</Sub>
-        <Sup>Sup</Sup>
-        <Underline>Underline</Underline>
-        <Var>Var</Var>
-      </div>
-    );
-  }
-}
-
-render(
-  <Component />,
-  document.getElementById('cf-component-typography--basic')
+const TypographyComponent = () => (
+  <div>
+    <Abbr title="Abbreviation">Abbr</Abbr>
+    <Cite>Cite</Cite>
+    <Del>Del</Del>
+    <Em>Em</Em>
+    <Ins>Ins</Ins>
+    <Kbd>Kbd</Kbd>
+    <Mark>Mark</Mark>
+    <Samp>Samp</Samp>
+    <Small>Small</Small>
+    <Strike>Strike</Strike>
+    <Strong>Strong</Strong>
+    <Sub>Sub</Sub>
+    <Sup>Sup</Sup>
+    <Underline>Underline</Underline>
+    <Var>Var</Var>
+  </div>
 );
+
+export default TypographyComponent;

@@ -1,4 +1,4 @@
-const { stubMethod } = require('cf-test-stub');
+import { stubMethod } from 'cf-test-stub';
 
 const originalFocus = global.HTMLElement.prototype.focus;
 
@@ -15,7 +15,4 @@ function getCurrentFocus() {
   return currentFocus;
 }
 
-module.exports = {
-  trackFocus,
-  getCurrentFocus
-};
+export { trackFocus, getCurrentFocus };

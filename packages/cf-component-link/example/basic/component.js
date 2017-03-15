@@ -1,26 +1,7 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import Link from 'cf-component-link';
 
-const { handleRoutes } = require('cf-util-route-handler');
-const Backbone = require('backbone');
-
-const Link = require('../../src/index');
-
-// setup the router
-handleRoutes(function(url) {
-  Backbone.history.navigate(url, true);
-});
-
-new Backbone.Router({
-  routes: {
-    '': () => console.log('/'),
-    hello: () => console.log('/hello'),
-    world: () => console.log('/world')
-  }
-});
-Backbone.history.start();
-
-class Component extends React.Component {
+class LinkComponent extends React.Component {
   handleClick() {
     console.log('handleClick!');
   }
@@ -47,4 +28,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-link--basic'));
+export default LinkComponent;

@@ -1,6 +1,6 @@
 # cf-util-http-poll
 
-> CloudFlare HTTP Polling Util
+> Cloudflare HTTP Polling Util
 
 ## Installation
 
@@ -11,7 +11,7 @@ $ npm install cf-util-http-poll
 ## Usage
 
 ```js
-const poll = require('cf-util-http-poll');
+import poll from 'cf-util-http-poll';
 
 const cancelPolling = poll('/api/v4/dnssec/status', {
   interval: 2000,

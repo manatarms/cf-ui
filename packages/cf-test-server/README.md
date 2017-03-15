@@ -1,6 +1,6 @@
 # cf-test-server
 
-> CloudFlare Server Test Util
+> Cloudflare Server Test Util
 
 ## Installation
 
@@ -11,20 +11,20 @@ $ npm install cf-test-server
 ## Usage
 
 ```js
-const assert = require('assert');
-const {createFakeServer} = require('cf-test-server');
-const http = require('cf-util-http');
+import assert from 'assert';
+import {createFakeServer} from 'cf-test-server';
+import http from 'cf-util-http';
 
 describe('apiEndpoints', () => {
   it('should do something', done => {
     const server = createFakeServer();
-    
+
     server.respondWith('GET', '/api/endpoint', 200, {
       'Content-Type': 'application/json'
     }, {
       value: 'foo'
     });
-    
+
     http.get('/api/endpoint', null, (err, res) => {
       if (err) {
         done(err);
@@ -39,7 +39,7 @@ describe('apiEndpoints', () => {
         }
       }
     });
-    
+
     server.respond();
   });
 });

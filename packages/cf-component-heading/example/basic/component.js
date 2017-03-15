@@ -1,20 +1,11 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import { Heading, HeadingCaption } from 'cf-component-heading';
 
-const {
-  Heading,
-  HeadingCaption
-} = require('../../src/index');
+const HeadingComponent = () => (
+  <Heading size={2}>
+    Look at this nice heading!
+    <HeadingCaption>It even has a nice HeadingCaption</HeadingCaption>
+  </Heading>
+);
 
-class Component extends React.Component {
-  render() {
-    return (
-      <Heading size={2}>
-        Look at this nice heading!
-        <HeadingCaption>It even has a nice HeadingCaption</HeadingCaption>
-      </Heading>
-    );
-  }
-}
-
-render(<Component />, document.getElementById('cf-component-heading--basic'));
+export default HeadingComponent;

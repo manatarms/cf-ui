@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Mark = require('../src/Mark');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Mark from '../src/Mark';
 
-describe('Mark', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Mark>Mark</Mark>,
-      // should equal
-      <mark className="cf-mark">Mark</mark>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Mark>Mark</Mark>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

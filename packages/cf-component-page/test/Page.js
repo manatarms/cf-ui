@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Page = require('../src/Page');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { Page } from 'cf-component-page';
 
-describe('Page', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Page>Hello World</Page>,
-      // should equal
-      <article className="cf-page">Hello World</article>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Page>Hello World</Page>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

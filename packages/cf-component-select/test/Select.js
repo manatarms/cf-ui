@@ -1,5 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Select = require('../src/Select');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Select from 'cf-component-select';
 
-console.warn('No Select tests.');
+test('should render', () => {
+  const component = renderer.create(<Select />);
+  expect(component.toJSON()).toMatchSnapshot();
+});

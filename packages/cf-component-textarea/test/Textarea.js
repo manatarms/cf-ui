@@ -1,18 +1,10 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Textarea = require('../src/Textarea');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Textarea from 'cf-component-textarea';
 
-describe('Textarea', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Textarea name="example" value="content" onChange={() => {}} />,
-      // should equal
-      <textarea
-        className="cf-textarea"
-        name="example"
-        value="content"
-        onChange={() => {}}
-      />
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(
+    <Textarea name="example" value="content" onChange={() => {}} />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

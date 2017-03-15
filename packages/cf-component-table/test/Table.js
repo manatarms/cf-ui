@@ -1,53 +1,33 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Table = require('../src/Table');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { Table } from 'cf-component-table';
 
-describe('Table', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Table>Table</Table>,
-      <table className="cf-table cf-table--bordered">Table</table>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Table>Table</Table>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render extra class names', function() {
-    assertEqualJSX(
-      <Table className="extra">Table</Table>,
-      <table className="cf-table cf-table--bordered extra">Table</table>
-    );
-  });
+test('should render extra class names', () => {
+  const component = renderer.create(<Table className="extra">Table</Table>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render striped', function() {
-    assertEqualJSX(
-      <Table striped>Table</Table>,
-      <table className="cf-table cf-table--striped cf-table--bordered">
-        Table
-      </table>
-    );
-  });
+test('should render striped', () => {
+  const component = renderer.create(<Table striped>Table</Table>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render hover', function() {
-    assertEqualJSX(
-      <Table hover>Table</Table>,
-      <table className="cf-table cf-table--hover cf-table--bordered">
-        Table
-      </table>
-    );
-  });
+test('should render hover', () => {
+  const component = renderer.create(<Table hover>Table</Table>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render not bordered', function() {
-    assertEqualJSX(
-      <Table bordered={false}>Table</Table>,
-      <table className="cf-table">Table</table>
-    );
-  });
+test('should render not bordered', () => {
+  const component = renderer.create(<Table bordered={false}>Table</Table>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render condensed', function() {
-    assertEqualJSX(
-      <Table condensed>Table</Table>,
-      <table className="cf-table cf-table--bordered cf-table--condensed">
-        Table
-      </table>
-    );
-  });
+test('should render condensed', () => {
+  const component = renderer.create(<Table condensed>Table</Table>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

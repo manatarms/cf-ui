@@ -1,20 +1,14 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const CardControl = require('../src/CardControl');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { CardControl } from 'cf-component-card';
 
-describe('CardControl', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <CardControl>CardControl</CardControl>,
-      // should equal
-      <div className="cf-card__control">CardControl</div>
-    );
-  });
-  it('should render wide', function() {
-    assertEqualJSX(
-      <CardControl wide>CardControl</CardControl>,
-      // should equal
-      <div className="cf-card__control cf-card__control--wide">CardControl</div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<CardControl>CardControl</CardControl>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
+test('should render wide', () => {
+  const component = renderer.create(
+    <CardControl wide>CardControl</CardControl>
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

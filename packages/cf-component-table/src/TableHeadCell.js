@@ -1,14 +1,17 @@
-const React = require('react');
-const { PropTypes } = React;
+import React, { PropTypes } from 'react';
 
 class TableHeadCell extends React.Component {
   render() {
-    let className = 'cf-table__cell cf-table__cell--head';
-    if (this.props.className.trim())
-      className += ' ' + this.props.className.trim();
+    const { className, ...props } = this.props;
+
+    let _className = 'cf-table__cell cf-table__cell--head';
+
+    if (className && className.trim()) {
+      _className += ' ' + className.trim();
+    }
 
     return (
-      <th className={className}>
+      <th className={_className} {...props}>
         {this.props.children}
       </th>
     );
@@ -24,4 +27,4 @@ TableHeadCell.defaultProps = {
   className: ''
 };
 
-module.exports = TableHeadCell;
+export default TableHeadCell;

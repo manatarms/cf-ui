@@ -1,16 +1,18 @@
-const React = require('react');
-const { render } = require('react-dom');
-const {
+import React from 'react';
+import {
   Card,
   CardContent,
   CardControl,
   CardDrawers,
   CardMessages,
   CardSection
-} = require('../../src/index');
-const { Button } = require('cf-component-button');
+} from 'cf-component-card';
+import { Button as ButtonUnstyled, ButtonTheme } from 'cf-component-button';
+import { applyTheme } from 'cf-style-container';
 
-class Component extends React.Component {
+const Button = applyTheme(ButtonUnstyled, ButtonTheme);
+
+class CardComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,7 +44,7 @@ class Component extends React.Component {
             />
           </CardContent>
           <CardControl>
-            <Button onClick={() => {}}>Example Control</Button>
+            <Button type="default" onClick={() => {}}>Example Control</Button>
           </CardControl>
         </CardSection>
         <CardDrawers
@@ -66,4 +68,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-card--basic'));
+export default CardComponent;

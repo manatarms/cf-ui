@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render align 1`] = `
+<div
+  className="cf-text--center"
+>
+  Hello
+</div>
+`;
+
+exports[`should render case 1`] = `
+<div
+  className="cf-text--uppercase"
+>
+  Hello
+</div>
+`;
+
+exports[`should render size 1`] = `
+<div
+  className="cf-text--normal"
+>
+  Hello
+</div>
+`;
+
+exports[`should render type 1`] = `
+<div
+  className="cf-text--info"
+>
+  Hello
+</div>
+`;

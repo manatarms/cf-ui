@@ -1,9 +1,7 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import Toggle from 'cf-component-toggle';
 
-const Toggle = require('../../src/index');
-
-class Component extends React.Component {
+class ToggleComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,4 +38,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-toggle--basic'));
+export default ToggleComponent;

@@ -1,37 +1,23 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Text = require('../src/Text');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Text from 'cf-component-text';
 
-describe('Text', function() {
-  it('should render size', function() {
-    assertEqualJSX(
-      <Text size="normal">Hello</Text>,
-      // should equal
-      <div className="cf-text--normal">Hello</div>
-    );
-  });
+test('should render size', () => {
+  const component = renderer.create(<Text size="normal">Hello</Text>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render align', function() {
-    assertEqualJSX(
-      <Text align="center">Hello</Text>,
-      // should equal
-      <div className="cf-text--center">Hello</div>
-    );
-  });
+test('should render align', () => {
+  const component = renderer.create(<Text align="center">Hello</Text>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render type', function() {
-    assertEqualJSX(
-      <Text type="info">Hello</Text>,
-      // should equal
-      <div className="cf-text--info">Hello</div>
-    );
-  });
+test('should render type', () => {
+  const component = renderer.create(<Text type="info">Hello</Text>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render case', function() {
-    assertEqualJSX(
-      <Text case="uppercase">Hello</Text>,
-      // should equal
-      <div className="cf-text--uppercase">Hello</div>
-    );
-  });
+test('should render case', () => {
+  const component = renderer.create(<Text case="uppercase">Hello</Text>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

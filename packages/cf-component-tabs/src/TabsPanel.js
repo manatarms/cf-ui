@@ -1,9 +1,8 @@
-const React = require('react');
-const { PropTypes } = React;
+import React, { PropTypes } from 'react';
 
 class TabsPanel extends React.Component {
   render() {
-    const selected = this.context.activeTab === this.props.id;
+    const selected = this.context.active === this.props.id;
 
     return (
       <div
@@ -11,7 +10,6 @@ class TabsPanel extends React.Component {
         role="tabpanel"
         aria-labelledby={this.props.id}
         aria-hidden={!selected}
-        style={{ display: selected ? 'block' : 'none' }}
       >
         {this.props.children}
       </div>
@@ -25,7 +23,7 @@ TabsPanel.propTypes = {
 };
 
 TabsPanel.contextTypes = {
-  activeTab: PropTypes.string.isRequired
+  active: PropTypes.string.isRequired
 };
 
-module.exports = TabsPanel;
+export default TabsPanel;

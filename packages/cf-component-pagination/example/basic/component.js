@@ -1,13 +1,8 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import { Pagination, PaginationItem } from 'cf-component-pagination';
+import Icon from 'cf-component-icon';
 
-const {
-  Pagination,
-  PaginationItem
-} = require('../../src/index');
-const Icon = require('cf-component-icon');
-
-class Component extends React.Component {
+class PaginationComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,7 +70,4 @@ class Component extends React.Component {
   }
 }
 
-render(
-  <Component />,
-  document.getElementById('cf-component-pagination--basic')
-);
+export default PaginationComponent;

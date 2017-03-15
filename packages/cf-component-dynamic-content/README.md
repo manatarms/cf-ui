@@ -1,6 +1,6 @@
 # cf-component-dynamic-content
 
-> CloudFlare Dynamic Content Component
+> Cloudflare Dynamic Content Component
 
 ## Installation
 
@@ -10,21 +10,21 @@ $ npm install cf-component-dynamic-content
 
 ## Usage
 
-```js
-const React = require('react');
-const DynamicContent = require('../../src/index');
+```jsx
+import React from 'react';
+import DynamicContent from 'cf-component-dynamic-content';
 
-export default class Application extends React.Component {
+class DynamicContentComponent extends React.Component {
   render() {
     return (
-      <div>
-        <h1>CloudFlare Dynamic Content Component Example</h1>
-
-        <DynamicContent dangerouslySetInnerHTML={{
+      <DynamicContent
+        dangerouslySetInnerHTML={{
           __html: '<p>Not an XSS attack, I swear.</p>'
-        }}/>
-      </div>
+        }}
+      />
     );
   }
 }
+
+export default DynamicContentComponent;
 ```

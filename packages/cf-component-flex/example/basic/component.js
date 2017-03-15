@@ -1,16 +1,11 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import { Flex, FlexItem } from 'cf-component-flex';
 
-const {
-  Flex,
-  FlexItem
-} = require('../../src/index');
-
-class Component extends React.Component {
+class FlexComponent extends React.Component {
   render() {
     return (
       <div>
-        <Flex spacing={false}>
+        <Flex spacing="wide">
           <FlexItem>FlexItem 1</FlexItem>
           <FlexItem>FlexItem 2</FlexItem>
           <FlexItem>FlexItem 3</FlexItem>
@@ -32,4 +27,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-flex--basic'));
+export default FlexComponent;

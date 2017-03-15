@@ -1,31 +1,25 @@
-const { equal: assertEqual } = require('assert');
-const markdown = require('../src/markdown');
+import markdown from 'cf-util-markdown';
 
-describe('renderMarkdown', function() {
-  it('should render markdown', function() {
-    assertEqual(
-      markdown('# Hello World'),
-      '<h1 id="hello-world">Hello World</h1>\n'
-    );
-  });
+test('should render markdown', () => {
+  expect(markdown('# Hello World')).toBe(
+    '<h1 id="hello-world">Hello World</h1>\n'
+  );
+});
 
-  it('should allow you to dangerously override sanitization', function() {
-    assertEqual(
-      markdown('<h1>Hello World</h1>', {
-        __dangerouslyDontSanitizeMarkdown: true
-      }),
-      '<h1>Hello World</h1>'
-    );
-  });
+test('should allow you to dangerously override sanitization', () => {
+  expect(
+    markdown('<h1>Hello World</h1>', {
+      __dangerouslyDontSanitizeMarkdown: true
+    })
+  ).toBe('<h1>Hello World</h1>');
+});
 
-  it('should not memoize when options are being passed', function() {
-    var str = '<div></div>';
-    assertEqual(markdown(str), '<p>&lt;div&gt;&lt;/div&gt;</p>\n');
-    assertEqual(
-      markdown(str, {
-        __dangerouslyDontSanitizeMarkdown: true
-      }),
-      str
-    );
-  });
+test('should not memoize when options are being passed', () => {
+  var str = '<div></div>';
+  expect(markdown(str)).toBe('<p>&lt;div&gt;&lt;/div&gt;</p>\n');
+  expect(
+    markdown(str, {
+      __dangerouslyDontSanitizeMarkdown: true
+    })
+  ).toBe(str);
 });

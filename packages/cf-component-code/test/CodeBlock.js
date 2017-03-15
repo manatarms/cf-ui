@@ -1,16 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const CodeBlock = require('../src/CodeBlock');
-const Code = require('../src/Code');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { CodeBlock } from 'cf-component-code';
 
-describe('CodeBlock', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <CodeBlock>Hello</CodeBlock>,
-      // should equal
-      <pre className="cf-code__block">
-        <Code>Hello</Code>
-      </pre>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<CodeBlock>Hello</CodeBlock>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

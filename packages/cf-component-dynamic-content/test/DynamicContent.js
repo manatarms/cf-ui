@@ -1,17 +1,12 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const DynamicContent = require('../src/DynamicContent');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import DynamicContent from 'cf-component-dynamic-content';
 
-describe('DynamicContent', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <DynamicContent
-        dangerouslySetInnerHTML={{ __html: '<p>Hello World</p>' }}
-      />,
-      // should equal
-      <div className="cf-dynamic-content">
-        <p>Hello World</p>
-      </div>
-    );
-  });
+test('should render', function() {
+  const component = renderer.create(
+    <DynamicContent
+      dangerouslySetInnerHTML={{ __html: '<p>Hello World</p>' }}
+    />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

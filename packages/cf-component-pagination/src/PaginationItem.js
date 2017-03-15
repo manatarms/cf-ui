@@ -1,6 +1,5 @@
-const React = require('react');
-const { PropTypes } = React;
-const Icon = require('cf-component-icon');
+import React, { PropTypes } from 'react';
+import Icon from 'cf-component-icon';
 
 class PaginationItem extends React.Component {
   constructor(props) {
@@ -30,7 +29,7 @@ class PaginationItem extends React.Component {
     if (isEllipsis) {
       children = <span>…</span>;
     } else if (isLoading) {
-      children = <Icon type="loading" />;
+      children = <Icon type="loading" label={false} />;
     } else {
       children = this.props.children;
     }
@@ -69,4 +68,4 @@ PaginationItem.propTypes = {
   children: PropTypes.node
 };
 
-module.exports = PaginationItem;
+export default PaginationItem;

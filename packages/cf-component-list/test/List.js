@@ -1,30 +1,18 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const List = require('../src/List');
-const ListItem = require('../src/ListItem');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { List } from 'cf-component-list';
 
-describe('List', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <List>List</List>,
-      // should equal
-      <ul className="cf-list">List</ul>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<List>List</List>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render ordered', function() {
-    assertEqualJSX(
-      <List ordered>List</List>,
-      // should equal
-      <ol className="cf-list cf-list--ordered">List</ol>
-    );
-  });
+test('should render ordered', () => {
+  const component = renderer.create(<List ordered>List</List>);
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render unstyled', function() {
-    assertEqualJSX(
-      <List unstyled>List</List>,
-      // should equal
-      <ul className="cf-list cf-list--unstyled">List</ul>
-    );
-  });
+test('should render unstyled', () => {
+  const component = renderer.create(<List unstyled>List</List>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

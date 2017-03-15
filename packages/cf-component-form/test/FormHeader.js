@@ -1,17 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const FormHeader = require('../src/FormHeader');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { FormHeader } from 'cf-component-form';
 
-describe('FormHeader', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <FormHeader title="FormHeader" />,
-      // should equal
-      <div className="cf-form__header">
-        <h3 className="cf-form__title">
-          FormHeader
-        </h3>
-      </div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<FormHeader title="FormHeader" />);
+  expect(component.toJSON()).toMatchSnapshot();
 });

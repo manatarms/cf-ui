@@ -1,34 +1,27 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const expect = require('chai').expect;
-const renderToStaticMarkup = require('react-dom/server').renderToStaticMarkup;
-const FormFieldError = require('../src/FormFieldError');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { FormFieldError } from 'cf-component-form';
 
-describe('FormFieldError', function() {
-  it('should render valid state', function() {
-    expect(
-      renderToStaticMarkup(<FormFieldError field={{}} validations={{}} />)
-    ).to.be.equal('');
-  });
+test('should render valid state', () => {
+  expect(
+    renderToStaticMarkup(<FormFieldError field={{}} validations={{}} />)
+  ).toBe('');
+});
 
-  it('should render invalid state', function() {
-    assertEqualJSX(
-      <FormFieldError field={{ invalid: true }} validations={{}} />,
-      // should equal
-      <div className="cf-form__field-error" />
-    );
-  });
+test('should render invalid state', () => {
+  const component = renderer.create(
+    <FormFieldError field={{ invalid: true }} validations={{}} />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  it('should render invalid state with validation errors', function() {
-    assertEqualJSX(
-      <FormFieldError
-        field={{ invalid: true }}
-        validations={{ required: 'This is required' }}
-      />,
-      // should equal
-      <div className="cf-form__field-error">
-        <p>This is required</p>
-      </div>
-    );
-  });
+test('should render invalid state with validation errors', () => {
+  const component = renderer.create(
+    <FormFieldError
+      field={{ invalid: true }}
+      validations={{ required: 'This is required' }}
+    />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
 });

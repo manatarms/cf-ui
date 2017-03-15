@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Em = require('../src/Em');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Em from '../src/Em';
 
-describe('Em', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Em>Em</Em>,
-      // should equal
-      <em className="cf-em">Em</em>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Em>Em</Em>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

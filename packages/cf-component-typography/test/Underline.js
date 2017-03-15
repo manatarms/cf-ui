@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const Underline = require('../src/Underline');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Underline from '../src/Underline';
 
-describe('Underline', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <Underline>Underline</Underline>,
-      // should equal
-      <u className="cf-underline">Underline</u>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<Underline>Underline</Underline>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

@@ -1,9 +1,7 @@
-const React = require('react');
-const { render } = require('react-dom');
+import React from 'react';
+import Select from 'cf-component-select';
 
-const Select = require('../../src/index');
-
-class Component extends React.Component {
+class SelectComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: 'one' };
@@ -45,4 +43,4 @@ class Component extends React.Component {
   }
 }
 
-render(<Component />, document.getElementById('cf-component-select--async'));
+export default SelectComponent;

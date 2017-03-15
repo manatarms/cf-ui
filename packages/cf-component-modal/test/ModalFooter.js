@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const ModalFooter = require('../src/ModalFooter');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { ModalFooter } from 'cf-component-modal';
 
-describe('ModalFooter', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <ModalFooter>ModalFooter</ModalFooter>,
-      // should equal
-      <div className="cf-modal__footer">ModalFooter</div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<ModalFooter>ModalFooter</ModalFooter>);
+  expect(component.toJSON()).toMatchSnapshot();
 });

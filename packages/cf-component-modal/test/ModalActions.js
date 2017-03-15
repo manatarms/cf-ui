@@ -1,13 +1,8 @@
-const React = require('react');
-const assertEqualJSX = require('assert-equal-jsx');
-const ModalActions = require('../src/ModalActions');
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { ModalActions } from 'cf-component-modal';
 
-describe('ModalActions', function() {
-  it('should render', function() {
-    assertEqualJSX(
-      <ModalActions>ModalActions</ModalActions>,
-      // should equal
-      <div className="cf-modal__actions">ModalActions</div>
-    );
-  });
+test('should render', () => {
+  const component = renderer.create(<ModalActions>ModalActions</ModalActions>);
+  expect(component.toJSON()).toMatchSnapshot();
 });
